@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Aşk Dolu Dijital Hediye - Senin İçin 💖</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        body {
+            font-family: 'Poppins', 'Segoe UI', 'Quicksand', sans-serif;
+            background: linear-gradient(145deg, #ffdde1 0%, #f9c9e2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .gift-container {
+            max-width: 1300px;
+            width: 100%;
+            background: rgba(255, 248, 245, 0.92);
+            border-radius: 60px 60px 80px 80px;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2), 0 0 0 8px #fff8, 0 0 0 12px #ffb7c5;
+            overflow: hidden;
+            backdrop-filter: blur(2px);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #ff758c, #ff7eb3);
+            padding: 2rem 1.5rem 1.8rem;
+            text-align: center;
+            color: white;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            text-shadow: 4px 4px 12px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-top: 12px;
+            font-weight: 500;
+        }
+
+        /* AŞK SAYACI */
+        .love-counter {
+            background: linear-gradient(135deg, #ffb347, #ff6b6b);
+            margin: 20px 25px 0 25px;
+            padding: 1.2rem;
+            border-radius: 60px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        .love-counter h3 {
+            font-size: 1.3rem;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .counter-box {
+            background: rgba(255,255,255,0.25);
+            border-radius: 50px;
+            padding: 15px;
+            backdrop-filter: blur(4px);
+        }
+        .time-digits {
+            font-size: 1.8rem;
+            font-weight: bold;
+            font-family: monospace;
+            letter-spacing: 2px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            row-gap: 10px;
+        }
+        .time-unit {
+            background: rgba(0,0,0,0.3);
+            padding: 8px 16px;
+            border-radius: 40px;
+            display: inline-block;
+        }
+        .time-unit span {
+            font-size: 1.9rem;
+            font-weight: 800;
+        }
+        .unit-label {
+            font-size: 0.8rem;
+            margin-left: 5px;
+            font-weight: normal;
+        }
+
+        .gallery {
+            padding: 2rem 1.5rem 1rem;
+        }
+
+        .gallery h2 {
+            text-align: center;
+            color: #b13e5c;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .photo-slider {
+            display: flex;
+            overflow-x: auto;
+            gap: 22px;
+            padding: 15px 10px 30px;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+        }
+
+        .photo-slider::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .photo-slider::-webkit-scrollbar-track {
+            background: #ffe2e8;
+            border-radius: 20px;
+        }
+
+        .photo-slider::-webkit-scrollbar-thumb {
+            background: #ff94aa;
+            border-radius: 20px;
+        }
+
+        .photo-card {
+            flex: 0 0 280px;
+            scroll-snap-align: center;
+            background: white;
+            border-radius: 48px;
+            overflow: hidden;
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.2);
+            transition: transform 0.2s ease;
+            cursor: pointer;
+        }
+
+        .photo-card:hover {
+            transform: scale(1.02);
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .games-section {
+            padding: 1.5rem 2rem 2rem;
+            background: #fff7f9;
+            border-radius: 50px 50px 40px 40px;
+            margin: 10px 18px 25px 18px;
+            box-shadow: inset 0 1px 5px #ffe0e8, 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        .games-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #e65c7b;
+            margin-bottom: 25px;
+        }
+
+        .game-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .game-card {
+            background: white;
+            border-radius: 44px;
+            flex: 1;
+            min-width: 280px;
+            padding: 20px 18px 24px;
+            text-align: center;
+            box-shadow: 0 12px 28px rgba(255, 105, 135, 0.2);
+            border: 1px solid #ffccd5;
+        }
+
+        .game-card h3 {
+            font-size: 1.7rem;
+            color: #d14b6e;
+            margin-bottom: 12px;
+        }
+
+        .game-card p {
+            color: #a1425c;
+            margin-bottom: 15px;
+        }
+
+        .heart-game {
+            background: #ffeef2;
+            padding: 8px;
+            border-radius: 60px;
+            margin: 10px 0;
+        }
+
+        button {
+            background: #ff90aa;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 60px;
+            font-weight: bold;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            margin: 6px;
+            box-shadow: 0 3px 5px rgba(0,0,0,0.1);
+            transition: 0.2s;
+        }
+
+        button:active {
+            transform: scale(0.96);
+        }
+
+        .click-counter {
+            font-size: 2rem;
+            font-weight: bold;
+            background: #ffecf0;
+            display: inline-block;
+            padding: 6px 20px;
+            border-radius: 50px;
+            margin: 8px auto;
+            color: #c33a5e;
+        }
+
+        .surprise-message {
+            margin-top: 18px;
+            font-weight: bold;
+            background: #ffd9e2;
+            border-radius: 34px;
+            padding: 10px;
+            font-size: 1rem;
+        }
+
+        .quiz-box {
+            background: #fff0f3;
+            border-radius: 28px;
+            padding: 15px;
+            margin-top: 12px;
+        }
+
+        .quiz-option {
+            background: #ffe3ea;
+            margin: 8px;
+            padding: 6px 12px;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: 0.1s;
+        }
+
+        .quiz-option:hover {
+            background: #ffc0ce;
+        }
+
+        .footer-note {
+            text-align: center;
+            background: #ffdce4;
+            margin: 10px 20px 25px;
+            padding: 1.3rem;
+            border-radius: 40px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #a12b4b;
+        }
+
+        @media (max-width: 700px) {
+            .hero h1 { font-size: 1.8rem; }
+            .games-title { font-size: 1.5rem; }
+            .time-digits { font-size: 1rem; gap: 8px; }
+            .time-unit span { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="gift-container">
+    <div class="hero">
+        <h1>💖 Senin İçin 💖 <span style="font-size:2rem;">🐻‍❄️❤️</span></h1>
+        <p>En tatlı anılarımız, minik oyunlar ve sürprizlerle dolu bir hediye!</p>
+    </div>
+
+    <!-- AŞK SAYACI - 31 AĞUSTOS 2025 00:00 -->
+    <div class="love-counter">
+        <h3>⏰ Sevgili Olduğumuz Gün ⏰</h3>
+        <div class="counter-box">
+            <div class="time-digits" id="loveTimer">
+                <div class="time-unit"><span id="days">0</span><span class="unit-label">gün</span></div>
+                <div class="time-unit"><span id="hours">0</span><span class="unit-label">saat</span></div>
+                <div class="time-unit"><span id="minutes">0</span><span class="unit-label">dakika</span></div>
+                <div class="time-unit"><span id="seconds">0</span><span class="unit-label">saniye</span></div>
+            </div>
+            <p style="font-size: 0.9rem; margin-top: 12px; opacity:0.9;">💗 Her saniye seninle daha güzel 💗</p>
+        </div>
+    </div>
+
+    <!-- FOTOĞRAF GALERİSİ -->
+    <div class="gallery">
+        <h2>📸 Bizden Kareler 📸</h2>
+        <div class="photo-slider" id="photoSlider">
+            <div class="photo-card">
+                <img src="images/1.JPEG" alt="Fotoğraf 1">
+            </div>
+            <div class="photo-card">
+                <img src="images/2.JPEG" alt="Fotoğraf 2">
+            </div>
+            <div class="photo-card">
+                <img src="images/3.JPEG" alt="Fotoğraf 3">
+            </div>
+            <div class="photo-card">
+                <img src="images/4.JPEG" alt="Fotoğraf 4">
+            </div>
+            <div class="photo-card">
+                <img src="images/5.JPEG" alt="Fotoğraf 5">
+            </div>
+            <div class="photo-card">
+                <img src="images/6.JPEG" alt="Fotoğraf 6">
+            </div>
+        </div>
+        <p style="text-align:center; margin-top:-8px; font-size:13px; color:#c87f96;">👉🏻 Kaydırarak anılara bak 👈🏻</p>
+    </div>
+
+    <!-- OYUNLAR -->
+    <div class="games-section">
+        <div class="games-title">🎮 Hadi Oynayalım! 🎮</div>
+        <div class="game-grid">
+            
+            <!-- OYUN 1: ÖPÜCÜK SAYACI -->
+            <div class="game-card">
+                <h3>💗 Öpücük Sayacı 💗</h3>
+                <p>Sevgiline sanal öpücük gönder, sayı artsın!</p>
+                <div class="heart-game">
+                    <div class="click-counter" id="kissCounter">0</div>
+                    <button id="kissBtn">😘 Öpücük Gönder</button>
+                    <button id="resetKissBtn">🔄 Sıfırla</button>
+                </div>
+                <div id="kissMessage" class="surprise-message" style="display:none;">💕 Harikasın! Bu kadar öpücük çok büyük aşk! 💕</div>
+            </div>
+            
+            <!-- OYUN 2: AŞK TAHMİNCESİ -->
+            <div class="game-card">
+                <h3>❓ Aşk Tahmincesi ❓</h3>
+                <p>Beni ne kadar tanıyorsun?</p>
+                <div class="quiz-box">
+                    <div id="questionText"></div>
+                    <div id="quizOptions" style="margin-top:10px;"></div>
+                    <div id="quizFeedback" style="margin-top: 12px; font-weight:bold;"></div>
+                </div>
+                <button id="newQuizBtn">✨ Yeni Soru ✨</button>
+            </div>
+
+            <!-- OYUN 3: SÜRPRİZ AŞK NOTU -->
+            <div class="game-card">
+                <h3>🎁 Sürpriz Aşk Notu 🎁</h3>
+                <p>Şans butonuna bas, tatlı mesaj gelsin.</p>
+                <button id="surpriseNoteBtn">✨ Aşk Notu Çek ✨</button>
+                <div id="surpriseResult" style="margin-top: 18px; background:#ffeef2; border-radius:34px; padding: 12px; min-height: 70px;">
+                    💌 Notunu görmek için tıkla
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-note">
+        💖 Bu site tamamen sana özel, en sevdiğim kişi! Her tıklamada biraz daha mutlu oluyorum. Seni çok seviyorum. 💖
+    </div>
+</div>
+
+<script>
+    // ------------------------------
+    // AŞK SAYACI - 31 AĞUSTOS 2025, SAAT 00:00
+    // Ay: 7 = Ağustos (Ocak=0, Şubat=1, Mart=2, Nisan=3, Mayıs=4, Haziran=5, Temmuz=6, AĞUSTOS=7)
+    const sevgiliOldugumuzTarih = new Date(2025, 7, 31, 0, 0, 0);
+    
+    function updateLoveCounter() {
+        const now = new Date();
+        const diff = now - sevgiliOldugumuzTarih;
+        
+        if (diff <= 0) {
+            document.getElementById('days').innerText = '0';
+            document.getElementById('hours').innerText = '0';
+            document.getElementById('minutes').innerText = '0';
+            document.getElementById('seconds').innerText = '0';
+            return;
+        }
+        
+        const seconds = Math.floor(diff / 1000);
+        const minutes = Math.floor(seconds / 60);
+        const hours = Math.floor(minutes / 60);
+        const days = Math.floor(hours / 24);
+        
+        document.getElementById('days').innerText = days;
+        document.getElementById('hours').innerText = hours % 24;
+        document.getElementById('minutes').innerText = minutes % 60;
+        document.getElementById('seconds').innerText = seconds % 60;
+    }
+    
+    setInterval(updateLoveCounter, 1000);
+    updateLoveCounter();
+    
+    // ------------------------------
+    // 1) ÖPÜCÜK SAYACI
+    let kissCount = 0;
+    const kissCounterEl = document.getElementById('kissCounter');
+    const kissBtn = document.getElementById('kissBtn');
+    const resetKissBtn = document.getElementById('resetKissBtn');
+    const kissMessageDiv = document.getElementById('kissMessage');
+
+    function updateKissDisplay() {
+        kissCounterEl.innerText = kissCount;
+        kissMessageDiv.style.display = kissCount >= 20 ? 'block' : 'none';
+    }
+
+    kissBtn.addEventListener('click', () => {
+        kissCount++;
+        updateKissDisplay();
+        const heartEmoji = ['💖', '❤️', '💗', '💓', '💕'];
+        const randomHeart = heartEmoji[Math.floor(Math.random() * heartEmoji.length)];
+        kissBtn.innerText = `${randomHeart} Öpücük Gönder ${randomHeart}`;
+        setTimeout(() => { kissBtn.innerText = '😘 Öpücük Gönder'; }, 400);
+    });
+
+    resetKissBtn.addEventListener('click', () => {
+        kissCount = 0;
+        updateKissDisplay();
+    });
+
+    // ------------------------------
+    // 2) AŞK TAHMİNCESİ
+    const questionsBank = [
+        { text: "En sevdiğim rapçi?", options: ["🎤 Ceg", "🎤 Hidra", "🎤 Pit10"], correct: 0 },
+        { text: "Gülüşünü nasıl buluyorum?", options: ["😊 Samimi", "😒 Kötü", "🥰 Tatlı"], correct: 2 },
+        { text: "Sana sevgim ne kadar?", options: ["🤔 Sıradan", "👍 Normal", "💖 Çok"], correct: 2 }
+    ];
+    
+    let currentQuestionIndex = 0;
+    const questionTextEl = document.getElementById('questionText');
+    const quizOptionsDiv = document.getElementById('quizOptions');
+    const quizFeedback = document.getElementById('quizFeedback');
+
+    function loadQuestion(index) {
+        const q = questionsBank[index % questionsBank.length];
+        questionTextEl.innerText = q.text;
+        quizOptionsDiv.innerHTML = '';
+        q.options.forEach((opt, idx) => {
+            const optDiv = document.createElement('div');
+            optDiv.className = 'quiz-option';
+            optDiv.innerText = opt;
+            optDiv.setAttribute('data-answer', idx === q.correct ? 'correct' : 'wrong');
+            optDiv.addEventListener('click', (e) => {
+                const isCorrect = e.currentTarget.getAttribute('data-answer') === 'correct';
+                if (isCorrect) {
+                    quizFeedback.innerHTML = '🥳 Harika! Beni çok iyi tanıyorsun 💞 +10 Aşk Puanı!';
+                    quizFeedback.style.color = '#b33f62';
+                    setTimeout(() => {
+                        currentQuestionIndex = (currentQuestionIndex + 1) % questionsBank.length;
+                        loadQuestion(currentQuestionIndex);
+                        quizFeedback.innerHTML = '✨ Yeni soru! Hadi bil bakalım ✨';
+                        setTimeout(() => {
+                            if(quizFeedback.innerHTML === '✨ Yeni soru! Hadi bil bakalım ✨') quizFeedback.innerHTML = '';
+                        }, 1800);
+                    }, 1000);
+                } else {
+                    quizFeedback.innerHTML = '😘 Biraz daha düşünsene? Aslında cevabı kalbinde bulacaksın! Tekrar dene 💗';
+                    quizFeedback.style.color = '#c94f6d';
+                }
+            });
+            quizOptionsDiv.appendChild(optDiv);
+        });
+    }
+    
+    document.getElementById('newQuizBtn').addEventListener('click', () => {
+        currentQuestionIndex = (currentQuestionIndex + 1) % questionsBank.length;
+        loadQuestion(currentQuestionIndex);
+        quizFeedback.innerHTML = '🎀 Yepyeni bir soru! Deneyelim 🎀';
+        setTimeout(() => {
+            if(quizFeedback.innerHTML === '🎀 Yepyeni bir soru! Deneyelim 🎀') quizFeedback.innerHTML = '';
+        }, 1500);
+    });
+    
+    loadQuestion(0);
+    
+    // ------------------------------
+    // 3) SÜRPRİZ AŞK NOTU
+    const surpriseMessages = [
+        "💌 Seni her gün daha çok seviyorum! 💌",
+        "🌸 Yanımda olduğun için şanslıyım, aşkım. 🌸",
+        "💖 Sen benim en güzel sürprizimsin! 💖",
+        "🌙 Gözlerin dolunay gibi aydınlatıyor dünyamı.",
+        "🍫 Tadın çikolata gibi, seni sevmek çok tatlı.",
+        "🎵 Kalbim senin için atıyor, daima."
+    ];
+    const surpriseBtn = document.getElementById('surpriseNoteBtn');
+    const surpriseResultDiv = document.getElementById('surpriseResult');
+    
+    surpriseBtn.addEventListener('click', () => {
+        const randomIndex = Math.floor(Math.random() * surpriseMessages.length);
+        surpriseResultDiv.innerHTML = `✨ ${surpriseMessages[randomIndex]} ✨ <span style="font-size:1.5rem;">🥰</span>`;
+        surpriseResultDiv.style.transform = "scale(1.02)";
+        setTimeout(() => { surpriseResultDiv.style.transform = ""; }, 200);
+    });
+</script>
+</body>
+</html>
