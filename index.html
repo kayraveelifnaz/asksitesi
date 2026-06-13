@@ -533,108 +533,112 @@
         </div>
     </div>
 
-    <!-- ========== BÜYÜK OYUNLAR BÖLÜMÜ (3 SCRATCH OYUNU) ========== -->
-    <style>
-        .buyuk-oyunlar {
-            background: linear-gradient(135deg, #fff0f5, #ffe4ed);
-            border-radius: 60px;
-            margin: 30px 20px 20px 20px;
-            padding: 25px 20px 35px;
-            box-shadow: 0 20px 35px rgba(233, 30, 99, 0.15);
-        }
-        .buyuk-oyunlar h2 {
-            text-align: center;
-            font-size: 2.2rem;
-            color: #e34262;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-        }
-        .buyuk-oyunlar-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            justify-content: center;
-        }
-        .oyun-kart-buyuk {
-            flex: 1;
-            min-width: 300px;
-            background: white;
-            border-radius: 48px;
-            padding: 20px 18px 25px;
-            text-align: center;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s ease;
-            border: 1px solid #ffccdd;
-        }
-        .oyun-kart-buyuk:hover {
-            transform: translateY(-8px);
-        }
-        .oyun-kart-buyuk h3 {
-            font-size: 1.6rem;
-            color: #d44a6e;
-            margin-bottom: 8px;
-        }
-        .oyun-kart-buyuk p {
-            font-size: 0.85rem;
-            color: #b9708a;
-            margin-bottom: 15px;
-        }
-        .oyun-kart-buyuk iframe {
-            border-radius: 28px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-            width: 100%;
-            height: 400px;
-        }
-        @media (max-width: 750px) {
-            .oyun-kart-buyuk iframe { height: 350px; }
-            .buyuk-oyunlar h2 { font-size: 1.7rem; }
-        }
-    </style>
+<!-- ========== BÜYÜK OYUNLAR BÖLÜMÜ (TurboWarp ile) ========== -->
+<style>
+    .buyuk-oyunlar {
+        background: linear-gradient(135deg, #fff0f5, #ffe4ed);
+        border-radius: 60px;
+        margin: 30px 20px 20px 20px;
+        padding: 25px 20px 35px;
+        box-shadow: 0 20px 35px rgba(233, 30, 99, 0.15);
+    }
+    .buyuk-oyunlar h2 {
+        text-align: center;
+        font-size: 2.2rem;
+        color: #e34262;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+    }
+    .buyuk-oyunlar-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        justify-content: center;
+    }
+    .oyun-kart-buyuk {
+        flex: 1;
+        min-width: 300px;
+        background: white;
+        border-radius: 48px;
+        padding: 20px 18px 25px;
+        text-align: center;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease;
+        border: 1px solid #ffccdd;
+    }
+    .oyun-kart-buyuk:hover {
+        transform: translateY(-8px);
+    }
+    .oyun-kart-buyuk h3 {
+        font-size: 1.6rem;
+        color: #d44a6e;
+        margin-bottom: 8px;
+    }
+    .oyun-kart-buyuk p {
+        font-size: 0.85rem;
+        color: #b9708a;
+        margin-bottom: 15px;
+    }
+    .oyun-kart-buyuk iframe {
+        border-radius: 28px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        width: 100%;
+        height: 450px;
+        background: white;
+    }
+    @media (max-width: 750px) {
+        .oyun-kart-buyuk iframe { height: 380px; }
+        .buyuk-oyunlar h2 { font-size: 1.7rem; }
+    }
+</style>
 
-    <div class="buyuk-oyunlar">
-        <h2>🎮✨ BÜYÜK OYUNLAR ✨🎮</h2>
-        <p style="text-align: center; margin-bottom: 25px; color: #c95a7a;">💖 Sevgilim için özel hazırlanmış 3 harika oyun! 💖</p>
+<div class="buyuk-oyunlar">
+    <h2>🎮✨ BÜYÜK OYUNLAR ✨🎮</h2>
+    <p style="text-align: center; margin-bottom: 25px; color: #c95a7a;">💖 Sevgilim için özel hazırlanmış 3 harika oyun! 💖</p>
+    
+    <div class="buyuk-oyunlar-grid">
         
-        <div class="buyuk-oyunlar-grid">
-            
-            <!-- OYUN 1 -->
-            <div class="oyun-kart-buyuk">
-                <h3>🎮 İlk Macera</h3>
-                <p>Scratch ile hazırlanan ilk oyunum</p>
-                <iframe src="https://scratch.mit.edu/projects/302541573/embed" 
-                        allowtransparency="true" 
-                        frameborder="0" 
-                        scrolling="no" 
-                        allowfullscreen></iframe>
-            </div>
-            
-            <!-- OYUN 2 -->
-            <div class="oyun-kart-buyuk">
-                <h3>💖 İkinci Macera</h3>
-                <p>Eğlence başlasın!</p>
-                <iframe src="https://scratch.mit.edu/projects/946418677/embed" 
-                        allowtransparency="true" 
-                        frameborder="0" 
-                        scrolling="no" 
-                        allowfullscreen></iframe>
-            </div>
-            
-            <!-- OYUN 3 -->
-            <div class="oyun-kart-buyuk">
-                <h3>🎯 Üçüncü Macera</h3>
-                <p>Sürpriz oyun! Umarım beğenirsin 💕</p>
-                <iframe src="https://scratch.mit.edu/projects/780204843/embed" 
-                        allowtransparency="true" 
-                        frameborder="0" 
-                        scrolling="no" 
-                        allowfullscreen></iframe>
-            </div>
-            
+        <!-- OYUN 1 -->
+        <div class="oyun-kart-buyuk">
+            <h3>🎮 İlk Macera</h3>
+            <p>Otomatik başlasın ✨</p>
+            <iframe src="https://turbowarp.org/302541573/embed?autoplay" 
+                    allowtransparency="true" 
+                    frameborder="0" 
+                    scrolling="no" 
+                    allowfullscreen>
+            </iframe>
         </div>
+        
+        <!-- OYUN 2 -->
+        <div class="oyun-kart-buyuk">
+            <h3>💖 İkinci Macera</h3>
+            <p>Duraklatma butonuyla birlikte</p>
+            <iframe src="https://turbowarp.org/946418677/embed?addons=pause" 
+                    allowtransparency="true" 
+                    frameborder="0" 
+                    scrolling="no" 
+                    allowfullscreen>
+            </iframe>
+        </div>
+        
+        <!-- OYUN 3 -->
+        <div class="oyun-kart-buyuk">
+            <h3>🎯 Üçüncü Macera</h3>
+            <p>Sürpriz oyun! Umarım beğenirsin 💕</p>
+            <iframe src="https://turbowarp.org/780204843/embed?autoplay&addons=pause" 
+                    allowtransparency="true" 
+                    frameborder="0" 
+                    scrolling="no" 
+                    allowfullscreen>
+            </iframe>
+        </div>
+        
     </div>
+</div>
 
     <div class="footer-note">
         💖 Bu site tamamen sana özel, en sevdiğim kişi! Her tıklamada biraz daha mutlu oluyorum. Seni çok seviyorum. 💖
