@@ -1,287 +1,584 @@
-<!-- EKLENECEK OYUNLARIN KAPSARI -->
-<div class="ek-oyunlar" style="font-family: system-ui, 'Segoe UI', sans-serif; max-width: 1200px; margin: 40px auto; padding: 20px; border-top: 3px dashed #ffb7c5; background: #fff9fb; border-radius: 32px; box-shadow: 0 10px 25px rgba(0,0,0,0.05);">
-  
-  <h2 style="text-align: center; color: #e34262; margin-bottom: 30px;">✨ Sürpriz Mini Oyunlar ✨</h2>
-  
-  <div style="display: flex; flex-wrap: wrap; gap: 30px; justify-content: center;">
-    
-    <!-- ------ OYUN 1 : KALP YAKALAMA ------ -->
-    <div style="flex: 1; min-width: 280px; background: white; border-radius: 48px; padding: 20px; box-shadow: 0 8px 20px rgba(233, 30, 99, 0.15); text-align: center;">
-      <h3 style="color:#c2185b;">❤️ Kalp Yakalama ❤️</h3>
-      <p style="font-size:14px; color:#a55;">Kayan kalpleri yakala, puan topla!</p>
-      <div style="position: relative; height: 350px; background: #ffeef4; border-radius: 40px; overflow: hidden; margin: 15px 0; cursor: pointer; box-shadow: inset 0 0 0 2px #ffcddc, 0 4px 12px rgba(0,0,0,0.1);" id="oyunAlani">
-        <div id="skorBoard" style="position: absolute; top: 15px; left: 20px; background: #e34262; color: white; padding: 5px 16px; border-radius: 40px; font-weight: bold; z-index: 10;">❤️ Skor: 0</div>
-        <div id="zamanBoard" style="position: absolute; top: 15px; right: 20px; background: #333; color: #ffd; padding: 5px 16px; border-radius: 40px; font-weight: bold; z-index: 10;">⏱️ 30</div>
-      </div>
-      <button id="oyunBaslatBtn" style="background:#e34262; border:none; color:white; font-size:1rem; padding:8px 24px; border-radius:60px; margin-top:8px; cursor:pointer; font-weight:bold; box-shadow:0 2px 6px rgba(0,0,0,0.2);">🎮 Başlat / Yeniden Başlat</button>
-      <p style="font-size:12px; margin-top:12px;">💡 İpucu: Kalplere tıkla ya da dokun!</p>
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>💖 Sana Özel 💖</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffe6f0 0%, #ffd9e6 100%);
+            font-family: 'Segoe UI', 'Quicksand', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
+            min-height: 100vh;
+            padding: 20px;
+            color: #a1335a;
+        }
+
+        /* Ana konteyner */
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        /* Ana mesaj bölümü (senin özel içeriğin) */
+        .main-message {
+            text-align: center;
+            padding: 40px 20px 30px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 80px;
+            backdrop-filter: blur(8px);
+            margin-bottom: 40px;
+            box-shadow: 0 15px 35px rgba(233, 30, 99, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .main-message h1 {
+            font-size: 3rem;
+            color: #e34262;
+            text-shadow: 2px 2px 10px #ffb7c5;
+            margin-bottom: 15px;
+        }
+
+        .main-message p {
+            font-size: 1.3rem;
+            line-height: 1.5;
+            max-width: 700px;
+            margin: 0 auto;
+            color: #b34e6e;
+        }
+
+        .heart-decoration {
+            font-size: 2rem;
+            letter-spacing: 12px;
+            margin-top: 20px;
+        }
+
+        /* Oyunlar ana alanı */
+        .oyunlar-alani {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 35px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        /* Her iki oyun için kart stilleri */
+        .oyun-karti {
+            flex: 1;
+            min-width: 320px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 56px;
+            padding: 25px 20px;
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+            backdrop-filter: blur(2px);
+            border: 1px solid #ffccd9;
+        }
+
+        .oyun-karti:hover {
+            transform: translateY(-5px);
+        }
+
+        .oyun-karti h2 {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            color: #e34262;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .oyun-karti p {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #b9708a;
+            margin-bottom: 20px;
+        }
+
+        /* Kalp yakalama oyunu alanı */
+        .catch-area {
+            position: relative;
+            height: 380px;
+            background: #fff5f8;
+            border-radius: 50px;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: inset 0 0 0 3px #ffccdd, 0 8px 20px rgba(0, 0, 0, 0.1);
+            margin: 10px 0;
+        }
+
+        .score-board, .time-board {
+            position: absolute;
+            top: 15px;
+            background: #e34262;
+            color: white;
+            padding: 6px 18px;
+            border-radius: 40px;
+            font-weight: bold;
+            font-size: 1rem;
+            z-index: 25;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            backdrop-filter: blur(2px);
+        }
+
+        .score-board { left: 15px; background: #c2185b; }
+        .time-board { right: 15px; background: #2c3e66; }
+
+        .btn-oyun {
+            background: #e34262;
+            border: none;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: bold;
+            padding: 10px 28px;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 12px;
+            width: 100%;
+            max-width: 220px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+        }
+
+        .btn-oyun:hover {
+            background: #b82c54;
+            transform: scale(0.97);
+        }
+
+        /* Eşleştirme oyunu 4x3 grid */
+        .memory-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            justify-items: center;
+            align-items: center;
+            margin: 20px 0;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .card {
+            width: 75px;
+            height: 95px;
+            background: linear-gradient(145deg, #ffdfe9, #ffc0d0);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 42px;
+            font-weight: bold;
+            box-shadow: 0 8px 0 #a76a7c;
+            cursor: pointer;
+            transition: 0.12s linear;
+            transform: scale(1);
+            user-select: none;
+        }
+
+        .card:active {
+            transform: scale(0.96);
+            box-shadow: 0 3px 0 #a76a7c;
+        }
+
+        .eslesme-bilgi {
+            text-align: center;
+            font-weight: bold;
+            background: #ffeef4;
+            padding: 8px;
+            border-radius: 60px;
+            margin-top: 15px;
+            color: #c2185b;
+        }
+
+        .karistir-btn {
+            background: #ff9f7c;
+            border: none;
+            color: white;
+            font-size: 0.9rem;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 5px;
+            transition: 0.2s;
+        }
+
+        .karistir-btn:hover {
+            background: #e37b55;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: #d46b8a;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 750px) {
+            .card {
+                width: 65px;
+                height: 85px;
+                font-size: 36px;
+            }
+            .memory-grid {
+                gap: 8px;
+            }
+            .main-message h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- Ana içerik - sevgilin için özel mesaj (istediğin gibi düzenle) -->
+    <div class="main-message">
+        <h1>💕 Senin İçin 💕</h1>
+        <p>Bu küçük oyunlar sana olan sevgimi anlatmaya yetmez ama kalbimi eğlenceli şekilde kazanmaya hazır mısın?<br>
+        ❤️ Kalpleri yakala, eşini bul ve gülümsemene dokunayım. ❤️</p>
+        <div class="heart-decoration">💖💗💘💝💓</div>
     </div>
-    
-    <!-- ------ OYUN 2 : KALBİN EŞİNİ BUL (EŞLEŞTİRME) ------ -->
-    <div style="flex: 1; min-width: 320px; background: white; border-radius: 48px; padding: 20px; box-shadow: 0 8px 20px rgba(233, 30, 99, 0.15); text-align: center;">
-      <h3 style="color:#c2185b;">💞 Kalbin Eşini Bul 💞</h3>
-      <p style="font-size:14px; color:#a55;">Aynı kalp çiftlerini eşleştir!</p>
-      <div id="kartGrid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; max-width: 380px; margin: 20px auto; justify-items: center;">
-        <!-- kartlar js ile doldurulacak -->
-      </div>
-      <button id="kartlariKaristirBtn" style="background:#f3a683; border:none; color:white; font-size:1rem; padding:8px 24px; border-radius:60px; cursor:pointer; font-weight:bold; margin-top:5px;">🃏 Kartları Karıştır</button>
-      <div id="eslesmeDurumu" style="margin-top: 12px; font-weight: bold; color: #e34262;"></div>
+
+    <!-- OYUNLAR BÖLÜMÜ -->
+    <div class="oyunlar-alani">
+        
+        <!-- 1. OYUN: KALP YAKALAMA -->
+        <div class="oyun-karti">
+            <h2>✨ Kalp Yakalama ✨</h2>
+            <p>Sürüklenen kalplere tıkla, puan topla! ⏱️ 30 saniye</p>
+            <div class="catch-area" id="catchGameArea">
+                <div class="score-board" id="scoreDisplay">❤️ Skor: 0</div>
+                <div class="time-board" id="timeDisplay">⏱️ 30</div>
+            </div>
+            <button class="btn-oyun" id="startCatchBtn">🎮 Başlat / Yenile</button>
+            <p style="font-size: 12px; text-align:center; margin-top: 12px;">💡 Düşen kalplere dokun ya da tıkla!</p>
+        </div>
+
+        <!-- 2. OYUN: KALBİN EŞİNİ BUL (4x3 - 6 çift) -->
+        <div class="oyun-karti">
+            <h2>💞 Kalbin Eşini Bul 💞</h2>
+            <p>Aynı kalp çiftlerini eşleştir (4x3, 6 çift)</p>
+            <div id="memoryContainer" class="memory-grid"></div>
+            <button class="karistir-btn" id="shuffleBtn">🃏 Kartları Karıştır</button>
+            <div class="eslesme-bilgi" id="matchStatus">💕 Eşleşme: 0 / 6</div>
+        </div>
     </div>
-  </div>
+    <footer>💌 Kalbim hep seninle.. 💌</footer>
 </div>
 
 <script>
-  (function() {
-    // ----- KALP YAKALAMA OYUNU -----
-    let aktifOyun = false;
-    let skor = 0;
-    let sure = 30;
-    let kalpId = 0;
-    let kalpler = [];
-    let zamanlayiciInterval = null;
-    let kalpUretimInterval = null;
-    
-    const oyunAlani = document.getElementById('oyunAlani');
-    const skorBoard = document.getElementById('skorBoard');
-    const zamanBoard = document.getElementById('zamanBoard');
-    const baslatBtn = document.getElementById('oyunBaslatBtn');
-    
-    function oyunuDurdurVeTemizle() {
-      if (zamanlayiciInterval) clearInterval(zamanlayiciInterval);
-      if (kalpUretimInterval) clearInterval(kalpUretimInterval);
-      for (let k of kalpler) {
-        if (k && k.element) k.element.remove();
-      }
-      kalpler = [];
-      aktifOyun = false;
-    }
-    
-    function kalpOlustur() {
-      if (!aktifOyun) return;
-      const kalp = document.createElement('div');
-      kalp.innerText = '❤️';
-      kalp.style.position = 'absolute';
-      kalp.style.fontSize = '32px';
-      kalp.style.cursor = 'pointer';
-      kalp.style.userSelect = 'none';
-      kalp.style.transition = 'all 0.05s linear';
-      const maxX = oyunAlani.clientWidth - 50;
-      const maxY = oyunAlani.clientHeight - 50;
-      const left = Math.max(10, Math.random() * maxX);
-      kalp.style.left = left + 'px';
-      kalp.style.top = '-40px';
-      kalp.style.opacity = '0.9';
-      kalp.style.filter = 'drop-shadow(0 2px 4px rgba(0,0,0,0.2))';
-      kalp.style.zIndex = 20;
-      const hiz = 1 + Math.random() * 3.5; // düşme hızı px/frame
-      const id = kalpId++;
-      const obj = { element: kalp, y: -40, hiz: hiz, id: id };
-      kalpler.push(obj);
-      oyunAlani.appendChild(kalp);
-      
-      kalp.addEventListener('click', (e) => {
-        e.stopPropagation();
-        if (!aktifOyun) return;
-        // yakalama
-        skor++;
-        skorBoard.innerText = `❤️ Skor: ${skor}`;
-        // kalp patlama efekti gibi
-        kalp.style.transform = 'scale(1.5)';
-        kalp.style.opacity = '0';
-        setTimeout(() => {
-          if (kalp.parentNode) kalp.remove();
-        }, 50);
-        // listeden kaldır
-        const index = kalpler.findIndex(k => k.id === id);
-        if (index !== -1) kalpler.splice(index, 1);
-      });
-      
-      // animasyon başlat (requestAnimationFrame ile hareket)
-      function dusur() {
-        if (!aktifOyun) return;
-        const idx = kalpler.findIndex(k => k.id === id);
-        if (idx === -1) return; // silinmiş
-        const item = kalpler[idx];
-        item.y += item.hiz;
-        if (item.y > oyunAlani.clientHeight - 40) {
-          // kaçtı -> can kaybı yok sadece kalp kaybolur
-          if (item.element && item.element.parentNode) item.element.remove();
-          kalpler.splice(idx,1);
-          return;
+    (function() {
+        // ---------- KALP YAKALAMA OYUNU ----------
+        let gameActive = false;
+        let catchScore = 0;
+        let timeLeft = 30;
+        let heartsArray = [];
+        let timerInterval = null;
+        let spawnInterval = null;
+        let heartIdCounter = 0;
+        
+        const gameArea = document.getElementById('catchGameArea');
+        const scoreSpan = document.getElementById('scoreDisplay');
+        const timeSpan = document.getElementById('timeDisplay');
+        const startBtn = document.getElementById('startCatchBtn');
+        
+        // Yardımcı: oyun alanı boyutları
+        function getAreaRect() {
+            return gameArea.getBoundingClientRect();
         }
-        if (item.element) item.element.style.top = item.y + 'px';
-        requestAnimationFrame(() => dusur());
-      }
-      requestAnimationFrame(dusur);
-    }
-    
-    function sureSayaci() {
-      if (!aktifOyun) return;
-      sure--;
-      zamanBoard.innerText = `⏱️ ${sure}`;
-      if (sure <= 0) {
-        // oyun bitti
-        oyunuDurdurVeTemizle();
-        aktifOyun = false;
-        zamanBoard.innerText = `⏱️ 0`;
-        alert(`Oyun Bitti! Toplam puanın: ${skor} ❤️`);
-        baslatBtn.innerText = '🎮 Tekrar Oyna';
-      }
-    }
-    
-    function oyunuBaslat() {
-      oyunuDurdurVeTemizle();
-      skor = 0;
-      sure = 30;
-      skorBoard.innerText = `❤️ Skor: 0`;
-      zamanBoard.innerText = `⏱️ 30`;
-      aktifOyun = true;
-      if (zamanlayiciInterval) clearInterval(zamanlayiciInterval);
-      if (kalpUretimInterval) clearInterval(kalpUretimInterval);
-      zamanlayiciInterval = setInterval(() => sureSayaci(), 1000);
-      kalpUretimInterval = setInterval(() => { if(aktifOyun) kalpOlustur(); }, 600);
-      // başlangıçta birkaç kalp
-      for(let i=0;i<3;i++) setTimeout(()=> kalpOlustur(), i*200);
-      baslatBtn.innerText = '🎮 Oynanıyor...';
-    }
-    
-    baslatBtn.addEventListener('click', () => {
-      oyunuBaslat();
-    });
-    
-    // ----- KALBİN EŞİNİ BUL (EŞLEŞTİRME) -----
-    const kartIkonlari = ['❤️', '💖', '💗', '💓', '💘', '💝', '💟', '❣️'];
-    let kartlar = [];
-    let acikKartlar = [];
-    let kilitli = false;
-    let eslesmeSayisi = 0;
-    const gridEl = document.getElementById('kartGrid');
-    const eslesmeDurumuEl = document.getElementById('eslesmeDurumu');
-    const karistirBtn = document.getElementById('kartlariKaristirBtn');
-    
-    function karistirArray(arr) {
-      for (let i = arr.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [arr[i], arr[j]] = [arr[j], arr[i]];
-      }
-      return arr;
-    }
-    
-    function yeniKartDizisi() {
-      // 4 çift seç (toplam 8 kart)
-      let secilenIkonlar = [...kartIkonlari.slice(0,4), ...kartIkonlari.slice(0,4)];
-      return karistirArray(secilenIkonlar);
-    }
-    
-    function kartOlustur(ikon, index) {
-      const kart = document.createElement('div');
-      kart.className = 'kart';
-      kart.style.width = '70px';
-      kart.style.height = '90px';
-      kart.style.backgroundColor = '#ffe0e7';
-      kart.style.borderRadius = '20px';
-      kart.style.display = 'flex';
-      kart.style.alignItems = 'center';
-      kart.style.justifyContent = 'center';
-      kart.style.fontSize = '38px';
-      kart.style.boxShadow = '0 6px 0 #b9848f';
-      kart.style.cursor = 'pointer';
-      kart.style.transition = '0.2s';
-      kart.style.userSelect = 'none';
-      kart.style.backfaceVisibility = 'hidden';
-      kart.setAttribute('data-icon', ikon);
-      kart.setAttribute('data-index', index);
-      kart.setAttribute('data-eslesti', 'false');
-      
-      // kapalı yüz
-      const inner = document.createElement('span');
-      inner.innerText = '?';
-      inner.style.fontSize = '42px';
-      inner.style.fontWeight = 'bold';
-      inner.style.color = '#e34262';
-      kart.appendChild(inner);
-      
-      let acik = false;
-      kart.addEventListener('click', () => {
-        if (kilitli) return;
-        if (acik) return;
-        if (kart.getAttribute('data-eslesti') === 'true') return;
-        // kartı aç
-        inner.innerText = ikon;
-        inner.style.fontSize = '48px';
-        acik = true;
-        acikKartlar.push({ kart, ikon, index });
-        if (acikKartlar.length === 2) {
-          kilitli = true;
-          setTimeout(() => kontrolEt(), 400);
+        
+        // Kalp düşürme animasyonu
+        function createHeart() {
+            if (!gameActive) return;
+            const rect = getAreaRect();
+            const areaWidth = rect.width;
+            const areaHeight = rect.height;
+            if (areaWidth <= 10) return;
+            
+            const heartDiv = document.createElement('div');
+            heartDiv.innerText = '❤️';
+            heartDiv.style.position = 'absolute';
+            heartDiv.style.fontSize = '38px';
+            heartDiv.style.cursor = 'pointer';
+            heartDiv.style.userSelect = 'none';
+            heartDiv.style.filter = 'drop-shadow(0 4px 6px rgba(0,0,0,0.2))';
+            heartDiv.style.transition = 'transform 0.05s';
+            heartDiv.style.zIndex = 20;
+            
+            const randomX = 10 + Math.random() * (areaWidth - 70);
+            heartDiv.style.left = randomX + 'px';
+            heartDiv.style.top = '-20px';
+            heartDiv.style.opacity = '0.95';
+            
+            const fallSpeed = 1.8 + Math.random() * 4; // px/frame
+            let currentY = -20;
+            const uniqueId = heartIdCounter++;
+            
+            gameArea.appendChild(heartDiv);
+            
+            const heartObj = {
+                element: heartDiv,
+                y: currentY,
+                speed: fallSpeed,
+                id: uniqueId
+            };
+            heartsArray.push(heartObj);
+            
+            // yakalama olayı
+            heartDiv.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (!gameActive) return;
+                // puan ekle
+                catchScore++;
+                scoreSpan.innerText = `❤️ Skor: ${catchScore}`;
+                // patlama efekti
+                heartDiv.style.transform = 'scale(1.6)';
+                heartDiv.style.opacity = '0';
+                setTimeout(() => {
+                    if (heartDiv.parentNode) heartDiv.remove();
+                }, 40);
+                // arrayden kaldır
+                const idx = heartsArray.findIndex(h => h.id === uniqueId);
+                if (idx !== -1) heartsArray.splice(idx, 1);
+            });
+            
+            // animasyon döngüsü
+            function fallAnimation() {
+                if (!gameActive) return;
+                const idxExist = heartsArray.findIndex(h => h.id === uniqueId);
+                if (idxExist === -1) return; // çoktan yakalandı ya da silindi
+                const heart = heartsArray[idxExist];
+                if (!heart.element || !heart.element.parentNode) {
+                    heartsArray.splice(idxExist, 1);
+                    return;
+                }
+                heart.y += heart.speed;
+                const areaRectNow = getAreaRect();
+                const maxBottom = areaRectNow.height - 50;
+                if (heart.y > maxBottom) {
+                    // kaçtı, sadece kaldır
+                    if (heart.element && heart.element.parentNode) heart.element.remove();
+                    heartsArray.splice(idxExist, 1);
+                    return;
+                }
+                if (heart.element) heart.element.style.top = heart.y + 'px';
+                requestAnimationFrame(fallAnimation);
+            }
+            requestAnimationFrame(fallAnimation);
         }
-      });
-      
-      // yeniden kapatma fonksiyonu
-      const kapat = () => {
-        if (kart.getAttribute('data-eslesti') === 'true') return;
-        inner.innerText = '?';
-        inner.style.fontSize = '42px';
-        acik = false;
-      };
-      kart.kapat = kapat;
-      return kart;
-    }
-    
-    function kontrolEt() {
-      const [kart1, kart2] = acikKartlar;
-      if (kart1.ikon === kart2.ikon) {
-        // eşleşti
-        kart1.kart.setAttribute('data-eslesti', 'true');
-        kart2.kart.setAttribute('data-eslesti', 'true');
-        kart1.kart.style.background = '#d4f1f9';
-        kart2.kart.style.background = '#d4f1f9';
-        kart1.kart.style.opacity = '0.7';
-        kart2.kart.style.opacity = '0.7';
-        eslesmeSayisi++;
-        eslesmeDurumuEl.innerText = `💕 Eşleşme: ${eslesmeSayisi} / 4`;
-        if (eslesmeSayisi === 4) {
-          eslesmeDurumuEl.innerHTML = '🎉 Tüm kalpler birleşti! 🎉 <br> 💖 Muhteşemsin! 💖';
+        
+        function updateTimer() {
+            if (!gameActive) return;
+            if (timeLeft <= 0) {
+                // oyun bitti
+                stopGame();
+                gameActive = false;
+                timeSpan.innerText = `⏱️ 0`;
+                alert(`💖 Oyun bitti! 💖\nTopladığın kalp sayısı: ${catchScore}\nNe kadar tatlısın! 💕`);
+                startBtn.innerText = '🎮 Tekrar Oyna';
+                return;
+            }
+            timeLeft--;
+            timeSpan.innerText = `⏱️ ${timeLeft}`;
         }
-        acikKartlar = [];
-        kilitli = false;
-      } else {
-        // eşleşmedi
-        setTimeout(() => {
-          kart1.kart.kapat();
-          kart2.kart.kapat();
-          acikKartlar = [];
-          kilitli = false;
-        }, 200);
-      }
-    }
-    
-    function tahlayiciKartlariYenile() {
-      gridEl.innerHTML = '';
-      const yeniDizi = yeniKartDizisi();
-      kartlar = [];
-      eslesmeSayisi = 0;
-      acikKartlar = [];
-      kilitli = false;
-      eslesmeDurumuEl.innerText = `💕 Eşleşme: 0 / 4`;
-      for (let i=0; i<yeniDizi.length; i++) {
-        const kart = kartOlustur(yeniDizi[i], i);
-        kartlar.push(kart);
-        gridEl.appendChild(kart);
-      }
-    }
-    
-    karistirBtn.addEventListener('click', () => {
-      tahlayiciKartlariYenile();
-    });
-    
-    // ilk yüklemede kartları hazırla
-    tahlayiciKartlariYenile();
-    
-    // Sayfa yeniden boyutlandırmada kalp oyun alanı düzenini koru
-    window.addEventListener('resize', () => {
-      // oyun alanındaki kalplerin konumlarını korumak için ekstra bir şey yapmıyoruz, sadece oyun alanı yeniden konumlanır.
-    });
-    
-  })();
+        
+        function stopGame() {
+            if (timerInterval) clearInterval(timerInterval);
+            if (spawnInterval) clearInterval(spawnInterval);
+            for (let h of heartsArray) {
+                if (h.element && h.element.parentNode) h.element.remove();
+            }
+            heartsArray = [];
+            timerInterval = null;
+            spawnInterval = null;
+        }
+        
+        function startCatchGame() {
+            stopGame();
+            catchScore = 0;
+            timeLeft = 30;
+            scoreSpan.innerText = `❤️ Skor: 0`;
+            timeSpan.innerText = `⏱️ 30`;
+            gameActive = true;
+            
+            timerInterval = setInterval(() => updateTimer(), 1000);
+            spawnInterval = setInterval(() => {
+                if (gameActive) createHeart();
+            }, 550);
+            // başlangıçta birkaç kalp hızlıca gelsin
+            for (let i = 0; i < 3; i++) {
+                setTimeout(() => { if(gameActive) createHeart(); }, i * 180);
+            }
+            startBtn.innerText = '🎮 Oynanıyor...';
+        }
+        
+        startBtn.addEventListener('click', () => {
+            if (gameActive) {
+                stopGame();
+                gameActive = false;
+                startBtn.innerText = '🎮 Başlat';
+            }
+            startCatchGame();
+        });
+        
+        // ---------- KALBİN EŞİNİ BUL (4x3 - 6 ÇİFT) ----------
+        // 6 farklı kalp çifti
+        const heartIcons = ['❤️', '💖', '💗', '💓', '💘', '💝']; // 6 çift -> toplam 12 kart
+        let memoryCards = [];     // kart objeleri
+        let openedCards = [];      // açık kartları tut { dom, icon, index }
+        let lockBoard = false;
+        let matchedPairs = 0;
+        const memoryGrid = document.getElementById('memoryContainer');
+        const matchStatusDiv = document.getElementById('matchStatus');
+        const shuffleBtn = document.getElementById('shuffleBtn');
+        
+        function shuffleArray(arr) {
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+        
+        function generateCardDeck() {
+            // 6 ikon, her birinden 2'şer tane (toplam 12)
+            let deck = [];
+            for (let i = 0; i < heartIcons.length; i++) {
+                deck.push(heartIcons[i]);
+                deck.push(heartIcons[i]);
+            }
+            return shuffleArray(deck);
+        }
+        
+        function createCardElement(icon, idx) {
+            const cardDiv = document.createElement('div');
+            cardDiv.className = 'card';
+            cardDiv.setAttribute('data-icon', icon);
+            cardDiv.setAttribute('data-idx', idx);
+            cardDiv.setAttribute('data-matched', 'false');
+            
+            const innerSpan = document.createElement('span');
+            innerSpan.innerText = '?';
+            innerSpan.style.fontSize = '40px';
+            innerSpan.style.fontWeight = 'bold';
+            innerSpan.style.display = 'flex';
+            innerSpan.style.alignItems = 'center';
+            innerSpan.style.justifyContent = 'center';
+            cardDiv.appendChild(innerSpan);
+            
+            let isOpen = false;
+            let matchFlag = false;
+            
+            cardDiv.addEventListener('click', () => {
+                if (lockBoard) return;
+                if (matchFlag) return;
+                if (isOpen) return;
+                // kartı aç
+                innerSpan.innerText = icon;
+                innerSpan.style.fontSize = '48px';
+                isOpen = true;
+                openedCards.push({ dom: cardDiv, icon: icon, idx: idx, inner: innerSpan });
+                
+                if (openedCards.length === 2) {
+                    lockBoard = true;
+                    setTimeout(checkMatch, 550);
+                }
+            });
+            
+            // reset kapatma fonksiyonu
+            const closeCard = () => {
+                if (matchFlag) return;
+                if (!isOpen) return;
+                innerSpan.innerText = '?';
+                innerSpan.style.fontSize = '40px';
+                isOpen = false;
+            };
+            
+            const setMatched = () => {
+                matchFlag = true;
+                cardDiv.setAttribute('data-matched', 'true');
+                cardDiv.style.background = '#cfe9df';
+                cardDiv.style.opacity = '0.8';
+                cardDiv.style.cursor = 'default';
+                innerSpan.innerText = icon;
+                innerSpan.style.fontSize = '48px';
+                isOpen = true;
+            };
+            
+            cardDiv.closeCard = closeCard;
+            cardDiv.setMatched = setMatched;
+            return cardDiv;
+        }
+        
+        function checkMatch() {
+            const [cardA, cardB] = openedCards;
+            if (cardA.icon === cardB.icon) {
+                // eşleşti
+                cardA.dom.setMatched();
+                cardB.dom.setMatched();
+                matchedPairs++;
+                matchStatusDiv.innerText = `💕 Eşleşme: ${matchedPairs} / 6`;
+                if (matchedPairs === 6) {
+                    matchStatusDiv.innerHTML = '🎉✨ Harikasın! Tüm kalpler birleşti! ✨🎉<br> 💖 Sen & Ben 💖';
+                }
+                openedCards = [];
+                lockBoard = false;
+            } else {
+                // eşleşmedi, kapat
+                setTimeout(() => {
+                    cardA.dom.closeCard();
+                    cardB.dom.closeCard();
+                    openedCards = [];
+                    lockBoard = false;
+                }, 300);
+            }
+        }
+        
+        function buildMemoryGame() {
+            memoryGrid.innerHTML = '';
+            const deck = generateCardDeck();  // 12 kartlı dizi
+            const cardElements = [];
+            for (let i = 0; i < deck.length; i++) {
+                const card = createCardElement(deck[i], i);
+                cardElements.push(card);
+                memoryGrid.appendChild(card);
+            }
+            memoryCards = cardElements;
+            openedCards = [];
+            lockBoard = false;
+            matchedPairs = 0;
+            matchStatusDiv.innerHTML = `💕 Eşleşme: 0 / 6`;
+        }
+        
+        function resetAndShuffle() {
+            buildMemoryGame();
+        }
+        
+        shuffleBtn.addEventListener('click', () => {
+            if (lockBoard) return;
+            resetAndShuffle();
+        });
+        
+        // İlk yükleme
+        buildMemoryGame();
+        
+        // Oyun alanı boyutlandırmada kalp yakalama pozisyon sorunu yaşanmaması için
+        window.addEventListener('resize', () => {
+            // hiçbir şey yapmaya gerek yok, sadece düşen kalpler konumlandırmada hata olmaz
+            if (gameActive) {
+                // yeni alan genişliğine göre konumlanan kalpler sorunsuz devam eder.
+            }
+        });
+    })();
 </script>
+</body>
+</html>
