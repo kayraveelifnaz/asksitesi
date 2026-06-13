@@ -57,7 +57,6 @@
             font-weight: 500;
         }
 
-        /* AŞK SAYACI */
         .love-counter {
             background: linear-gradient(135deg, #ffb347, #ff6b6b);
             margin: 20px 25px 0 25px;
@@ -320,27 +319,27 @@
         </div>
     </div>
 
-    <!-- FOTOĞRAF GALERİSİ - RESİMLER index.html İLE AYNI KLASÖRDE -->
+    <!-- FOTOĞRAF GALERİSİ - .jpeg uzantılı -->
     <div class="gallery">
         <h2>📸 Bizden Kareler 📸</h2>
         <div class="photo-slider" id="photoSlider">
             <div class="photo-card">
-                <img src="1.JPEG" alt="Fotoğraf 1">
+                <img src="1.jpeg" alt="Fotoğraf 1">
             </div>
             <div class="photo-card">
-                <img src="2.JPEG" alt="Fotoğraf 2">
+                <img src="2.jpeg" alt="Fotoğraf 2">
             </div>
             <div class="photo-card">
-                <img src="3.JPEG" alt="Fotoğraf 3">
+                <img src="3.jpeg" alt="Fotoğraf 3">
             </div>
             <div class="photo-card">
-                <img src="4.JPEG" alt="Fotoğraf 4">
+                <img src="4.jpeg" alt="Fotoğraf 4">
             </div>
             <div class="photo-card">
-                <img src="5.JPEG" alt="Fotoğraf 5">
+                <img src="5.jpeg" alt="Fotoğraf 5">
             </div>
             <div class="photo-card">
-                <img src="6.JPEG" alt="Fotoğraf 6">
+                <img src="6.jpeg" alt="Fotoğraf 6">
             </div>
         </div>
         <p style="text-align:center; margin-top:-8px; font-size:13px; color:#c87f96;">👉🏻 Kaydırarak anılara bak 👈🏻</p>
@@ -351,7 +350,6 @@
         <div class="games-title">🎮 Hadi Oynayalım! 🎮</div>
         <div class="game-grid">
             
-            <!-- OYUN 1: ÖPÜCÜK SAYACI -->
             <div class="game-card">
                 <h3>💗 Öpücük Sayacı 💗</h3>
                 <p>Sevgiline sanal öpücük gönder, sayı artsın!</p>
@@ -363,7 +361,6 @@
                 <div id="kissMessage" class="surprise-message" style="display:none;">💕 Harikasın! Bu kadar öpücük çok büyük aşk! 💕</div>
             </div>
             
-            <!-- OYUN 2: AŞK TAHMİNCESİ -->
             <div class="game-card">
                 <h3>❓ Aşk Tahmincesi ❓</h3>
                 <p>Beni ne kadar tanıyorsun?</p>
@@ -375,7 +372,6 @@
                 <button id="newQuizBtn">✨ Yeni Soru ✨</button>
             </div>
 
-            <!-- OYUN 3: SÜRPRİZ AŞK NOTU -->
             <div class="game-card">
                 <h3>🎁 Sürpriz Aşk Notu 🎁</h3>
                 <p>Şans butonuna bas, tatlı mesaj gelsin.</p>
@@ -393,7 +389,6 @@
 </div>
 
 <script>
-    // ------------------------------
     // AŞK SAYACI - 31 AĞUSTOS 2025, SAAT 00:00
     const sevgiliOldugumuzTarih = new Date(2025, 7, 31, 0, 0, 0);
     
@@ -423,8 +418,7 @@
     setInterval(updateLoveCounter, 1000);
     updateLoveCounter();
     
-    // ------------------------------
-    // 1) ÖPÜCÜK SAYACI
+    // ÖPÜCÜK SAYACI
     let kissCount = 0;
     const kissCounterEl = document.getElementById('kissCounter');
     const kissBtn = document.getElementById('kissBtn');
@@ -450,8 +444,7 @@
         updateKissDisplay();
     });
 
-    // ------------------------------
-    // 2) AŞK TAHMİNCESİ
+    // AŞK TAHMİNCESİ
     const questionsBank = [
         { text: "En sevdiğim rapçi?", options: ["🎤 Ceg", "🎤 Hidra", "🎤 Pit10"], correct: 0 },
         { text: "Gülüşünü nasıl buluyorum?", options: ["😊 Samimi", "😒 Kötü", "🥰 Tatlı"], correct: 2 },
@@ -505,8 +498,7 @@
     
     loadQuestion(0);
     
-    // ------------------------------
-    // 3) SÜRPRİZ AŞK NOTU
+    // SÜRPRİZ AŞK NOTU
     const surpriseMessages = [
         "💌 Seni her gün daha çok seviyorum! 💌",
         "🌸 Yanımda olduğun için şanslıyım, aşkım. 🌸",
