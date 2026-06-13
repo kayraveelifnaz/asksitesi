@@ -199,6 +199,10 @@
             text-align: center;
             box-shadow: 0 12px 28px rgba(255, 105, 135, 0.2);
             border: 1px solid #ffccd5;
+            transition: transform 0.2s;
+        }
+        .game-card:hover {
+            transform: translateY(-5px);
         }
 
         .game-card h3 {
@@ -250,7 +254,7 @@
             font-size: 1rem;
         }
 
-        .quiz-box, .memory-grid, .dice-area {
+        .quiz-box, .memory-grid, .wheel-area, .secret-area, .memory-area {
             background: #fff0f3;
             border-radius: 28px;
             padding: 15px;
@@ -287,11 +291,9 @@
             border-radius: 16px;
             cursor: pointer;
             transition: 0.2s;
-            transform-style: preserve-3d;
         }
         .memory-card.flipped {
             background: #fff0f3;
-            transform: rotateY(180deg);
         }
         .heart-catch-area {
             background: #ffe3ea;
@@ -317,6 +319,39 @@
             font-size: 1.5rem;
             font-weight: bold;
             margin: 10px 0;
+        }
+        .wheel {
+            width: 150px;
+            height: 150px;
+            margin: 10px auto;
+            border-radius: 50%;
+            background: conic-gradient(#ff6b6b 0% 25%, #ffb347 25% 50%, #ff6b9d 50% 75%, #c06cff 75% 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .wheel:active {
+            transform: scale(0.95);
+        }
+        .wheel-inner {
+            background: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+        }
+        .secret-input {
+            padding: 8px;
+            border-radius: 30px;
+            border: 1px solid #ffb7c5;
+            margin: 8px;
+            width: 80%;
         }
         .footer-note {
             text-align: center;
@@ -385,7 +420,7 @@
                 <div id="kissMessage" class="surprise-message" style="display:none;">💕 Harikasın! Bu kadar öpücük çok büyük aşk! 💕</div>
             </div>
             
-            <!-- OYUN 2: AŞK TAHMİNCESİ (genişletildi) -->
+            <!-- OYUN 2: AŞK TAHMİNCESİ -->
             <div class="game-card">
                 <h3>❓ Aşk Tahmincesi ❓</h3>
                 <p>Beni ne kadar tanıyorsun?</p>
@@ -405,7 +440,7 @@
                 <div id="surpriseResult" style="margin-top: 18px; background:#ffeef2; border-radius:34px; padding: 12px; min-height: 70px;">💌 Notunu görmek için tıkla</div>
             </div>
 
-            <!-- YENİ OYUN 4: KALP YAKALAMA -->
+            <!-- OYUN 4: KALP YAKALAMA -->
             <div class="game-card">
                 <h3>💝 Kalp Yakalama 💝</h3>
                 <p>Uçan kalplere tıkla, puan topla!</p>
@@ -416,24 +451,47 @@
                 <button id="startHeartGame">Başlat / Sıfırla</button>
             </div>
 
-            <!-- YENİ OYUN 5: AŞK FALI ZARI -->
-            <div class="game-card">
-                <h3>🎲 Aşk Falı Zarı 🎲</h3>
-                <p>Zar at, aşk falını öğren!</p>
-                <div class="dice-area">
-                    <div style="font-size:3rem;" id="diceValue">🎲</div>
-                    <button id="rollDiceBtn">Zar At</button>
-                    <div id="fortuneMessage" style="margin-top:12px; font-weight:bold; padding:8px;">✨ Falın burada görünecek ✨</div>
-                </div>
-            </div>
-
-            <!-- YENİ OYUN 6: EŞİNİ BULMA (Hafıza Oyunu) -->
+            <!-- OYUN 5: EŞİNİ BULMA (Hafıza Oyunu) -->
             <div class="game-card">
                 <h3>🧠 Eşini Bulma 🧠</h3>
                 <p>Aynı kalpleri eşle, sevgini göster!</p>
                 <div class="memory-grid" id="memoryGrid"></div>
                 <button id="resetMemoryBtn">🔄 Yeniden Başlat</button>
                 <div id="memoryStatus" style="margin-top:8px;">Kartları eşleştir</div>
+            </div>
+
+            <!-- YENİ OYUN 6: AŞK ÇARKI -->
+            <div class="game-card">
+                <h3>✨ Aşk Çarkı ✨</h3>
+                <p>Çarkı çevir, romantik ödülünü al!</p>
+                <div class="wheel" id="loveWheel">
+                    <div class="wheel-inner">🎡</div>
+                </div>
+                <div id="wheelResult" style="margin-top: 15px; font-weight: bold; min-height: 60px;">✨ Çarkı çevirmek için tıkla ✨</div>
+            </div>
+
+            <!-- YENİ OYUN 7: GİZLİ MESAJ -->
+            <div class="game-card">
+                <h3>💌 Gizli Mesaj 💌</h3>
+                <p>Şifreyi çöz, sürpriz aşk mesajını bul!</p>
+                <div class="secret-area">
+                    <div>🔐 İpucu: Senin doğum günün (GGAA)</div>
+                    <input type="text" id="secretCode" class="secret-input" placeholder="Şifreyi gir...">
+                    <button id="unlockBtn">🔓 Mesajı Aç</button>
+                    <div id="secretMessage" style="margin-top: 12px; padding: 10px; background:#ffeef2; border-radius: 24px; min-height: 60px;">💖 Şifreyi gir, aşk mektubu gelsin...</div>
+                </div>
+            </div>
+
+            <!-- YENİ OYUN 8: HATIRLIYOR MUSUN? -->
+            <div class="game-card">
+                <h3>🌸 Hatırlıyor musun? 🌸</h3>
+                <p>Birlikte anılarımızı tahmin et!</p>
+                <div class="quiz-box">
+                    <div id="memoryQuestion"></div>
+                    <div id="memoryOptions"></div>
+                    <div id="memoryFeedback"></div>
+                </div>
+                <button id="newMemoryBtn">✨ Yeni Anı Sorusu ✨</button>
             </div>
         </div>
     </div>
@@ -475,7 +533,7 @@
     kissBtn.addEventListener('click', () => { kissCount++; updateKissDisplay(); });
     resetKissBtn.addEventListener('click', () => { kissCount = 0; updateKissDisplay(); });
 
-    // ---- AŞK TAHMİNCESİ (genişletilmiş) ----
+    // ---- AŞK TAHMİNCESİ ----
     const questionsBank = [
         { text: "En sevdiğim renk?", options: ["💙 Mavi", "❤️ Kırmızı", "💖 Pembe"], correct: 2 },
         { text: "En sevdiğim rapçi?", options: ["🎤 Ceg", "🎤 Hidra", "🎤 Pit10"], correct: 0 },
@@ -562,23 +620,6 @@
     document.getElementById('startHeartGame').addEventListener('click', startHeartGame);
     startHeartGame();
 
-    // ---- AŞK FALI ZARI ----
-    const fortunes = [
-        "💕 Bu gece çok romantik bir mesaj alacaksın!",
-        "🌟 Aşkın her geçen gün daha da büyüyecek.",
-        "🍫 Yakında onunla çikolatalı bir sürpriz yaşayacaksın.",
-        "🌹 Kalbini en güzel şekilde fethedeceksin.",
-        "🎶 Birlikte dans etmek size iyi gelecek.",
-        "💌 Unutma, en büyük falcı sensin, sevgiyle!"
-    ];
-    document.getElementById('rollDiceBtn').addEventListener('click', () => {
-        const dice = Math.floor(Math.random() * 6) + 1;
-        const diceSymbols = ['⚀', '⚁', '⚂', '⚃', '⚄', '⚅'];
-        document.getElementById('diceValue').innerText = diceSymbols[dice-1];
-        const fortune = fortunes[Math.floor(Math.random() * fortunes.length)];
-        document.getElementById('fortuneMessage').innerHTML = `🎲 Zar: ${dice} <br> 💖 Fal: ${fortune}`;
-    });
-
     // ---- EŞİNİ BULMA (Hafıza Oyunu) ----
     const memoryValues = ['❤️', '💖', '💗', '💓', '💕', '💞', '💘', '💝'];
     let memoryCards = [...memoryValues, ...memoryValues];
@@ -650,6 +691,68 @@
     }
     document.getElementById('resetMemoryBtn').addEventListener('click', createMemoryBoard);
     createMemoryBoard();
-</script>
-</body>
-</html>
+
+    // ---- YENİ OYUN 1: AŞK ÇARKI ----
+    const wheelPrizes = [
+        "💕 +10 Öpücük Hakkı!",
+        "🌸 Sana bir şiir yazacağım!",
+        "💖 Sarılma ödülü kazandın!",
+        "🎵 En sevdiğin şarkıyı dinleme vakti",
+        "🍫 Sana çikolata alacağım",
+        "🌙 Bu gece masal okuyacağım sana",
+        "💌 Gizli bir itiraf: Seni çok seviyorum!",
+        "✨ Bir sürpriz hakkı kazandın!"
+    ];
+    const wheel = document.getElementById('loveWheel');
+    const wheelResult = document.getElementById('wheelResult');
+    let isSpinning = false;
+    wheel.addEventListener('click', () => {
+        if(isSpinning) return;
+        isSpinning = true;
+        const spinCount = Math.floor(Math.random() * 20) + 10;
+        let currentRotation = 0;
+        const interval = setInterval(() => {
+            currentRotation += 15;
+            wheel.style.transform = `rotate(${currentRotation}deg)`;
+            if(currentRotation >= 360 * spinCount) {
+                clearInterval(interval);
+                wheel.style.transform = '';
+                const prizeIndex = Math.floor(Math.random() * wheelPrizes.length);
+                wheelResult.innerHTML = `🎡 Çark durdu! 🎡<br>🏆 Kazandın: ${wheelPrizes[prizeIndex]} 🏆`;
+                isSpinning = false;
+            }
+        }, 20);
+    });
+
+    // ---- YENİ OYUN 2: GİZLİ MESAJ ----
+    const secretCodeInput = document.getElementById('secretCode');
+    const unlockBtn = document.getElementById('unlockBtn');
+    const secretMessageDiv = document.getElementById('secretMessage');
+    // Varsayılan şifre: 2412 (örnek, sevgilinin doğum günü GGAA formatında)
+    const correctCode = "2412"; // Bunu sevgilinin doğum gününe göre değiştirebilirsin
+    unlockBtn.addEventListener('click', () => {
+        if(secretCodeInput.value === correctCode) {
+            secretMessageDiv.innerHTML = "💖💖💖 Sana olan sevgim kelimelere sığmaz! Her gün sana daha çok aşık oluyorum. Sen benim en büyük şansımsın! 💖💖💖";
+            secretMessageDiv.style.background = "#ffd9e2";
+        } else {
+            secretMessageDiv.innerHTML = "❌ Şifre yanlış! İpucu: Doğum günün (gün ay olarak) ❌";
+            secretMessageDiv.style.background = "#ffeef2";
+        }
+    });
+
+    // ---- YENİ OYUN 3: HATIRLIYOR MUSUN? ----
+    const memoryQuestions = [
+        { text: "İlk buluşmamızda neredeydik?", options: ["☕ Kafe", "🍿 Sinema", "🌳 Park"], correct: 0 },
+        { text: "Bana ilk kez ne demiştin?", options: ["😊 Merhaba", "🥰 Çok tatlısın", "💕 Seni seviyorum"], correct: 0 },
+        { text: "En çok güldüğümüz anı nerede yaşadık?", options: ["🎮 Evde", "🍕 Restoranda", "🚶 Yürüyüşte"], correct: 0 },
+        { text: "Sana ilk hediyem neydi?", options: ["🧸 Oyuncak ayı", "📖 Kitap", "💍 Yüzük"], correct: 0 }
+    ];
+    let currentMemoryIndex = 0;
+    const memoryQuestionEl = document.getElementById('memoryQuestion');
+    const memoryOptionsDiv = document.getElementById('memoryOptions');
+    const memoryFeedbackDiv = document.getElementById('memoryFeedback');
+    function loadMemoryQuestion(index) {
+        const q = memoryQuestions[index % memoryQuestions.length];
+        memoryQuestionEl.innerText = q.text;
+        memoryOptionsDiv.innerHTML = '';
+        q.options.forEach
