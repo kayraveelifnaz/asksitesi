@@ -1,758 +1,287 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Aşk Dolu Dijital Hediye - Senin İçin 💖</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            user-select: none;
-        }
-
-        body {
-            font-family: 'Poppins', 'Segoe UI', 'Quicksand', sans-serif;
-            background: linear-gradient(145deg, #ffdde1 0%, #f9c9e2 100%);
-            min-height: 100vh;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .gift-container {
-            max-width: 1400px;
-            width: 100%;
-            background: rgba(255, 248, 245, 0.92);
-            border-radius: 60px 60px 80px 80px;
-            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2), 0 0 0 8px #fff8, 0 0 0 12px #ffb7c5;
-            overflow: hidden;
-            backdrop-filter: blur(2px);
-        }
-
-        .hero {
-            background: linear-gradient(135deg, #ff758c, #ff7eb3);
-            padding: 2rem 1.5rem 1.8rem;
-            text-align: center;
-            color: white;
-            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
-        }
-
-        .hero h1 {
-            font-size: 2.5rem;
-            letter-spacing: 2px;
-            text-shadow: 4px 4px 12px rgba(0,0,0,0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            margin-top: 12px;
-            font-weight: 500;
-        }
-
-        .love-counter {
-            background: linear-gradient(135deg, #ffb347, #ff6b6b);
-            margin: 20px 25px 0 25px;
-            padding: 1.2rem;
-            border-radius: 60px;
-            text-align: center;
-            color: white;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-        }
-        .love-counter h3 {
-            font-size: 1.3rem;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        .counter-box {
-            background: rgba(255,255,255,0.25);
-            border-radius: 50px;
-            padding: 15px;
-            backdrop-filter: blur(4px);
-        }
-        .time-digits {
-            font-size: 1.8rem;
-            font-weight: bold;
-            font-family: monospace;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-            row-gap: 10px;
-        }
-        .time-unit {
-            background: rgba(0,0,0,0.3);
-            padding: 8px 16px;
-            border-radius: 40px;
-            display: inline-block;
-        }
-        .time-unit span {
-            font-size: 1.9rem;
-            font-weight: 800;
-        }
-        .unit-label {
-            font-size: 0.8rem;
-            margin-left: 5px;
-            font-weight: normal;
-        }
-
-        .gallery {
-            padding: 2rem 1.5rem 1rem;
-        }
-
-        .gallery h2 {
-            text-align: center;
-            color: #b13e5c;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 25px;
-        }
-
-        .photo-slider {
-            display: flex;
-            overflow-x: auto;
-            gap: 22px;
-            padding: 15px 10px 30px;
-            scroll-snap-type: x mandatory;
-            scroll-behavior: smooth;
-        }
-
-        .photo-slider::-webkit-scrollbar {
-            height: 8px;
-        }
-
-        .photo-slider::-webkit-scrollbar-track {
-            background: #ffe2e8;
-            border-radius: 20px;
-        }
-
-        .photo-slider::-webkit-scrollbar-thumb {
-            background: #ff94aa;
-            border-radius: 20px;
-        }
-
-        .photo-card {
-            flex: 0 0 280px;
-            scroll-snap-align: center;
-            background: white;
-            border-radius: 48px;
-            overflow: hidden;
-            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.2);
-            transition: transform 0.2s ease;
-            cursor: pointer;
-        }
-
-        .photo-card:hover {
-            transform: scale(1.02);
-        }
-
-        .photo-card img {
-            width: 100%;
-            height: 280px;
-            object-fit: cover;
-            display: block;
-        }
-
-        .games-section {
-            padding: 1.5rem 2rem 2rem;
-            background: #fff7f9;
-            border-radius: 50px 50px 40px 40px;
-            margin: 10px 18px 25px 18px;
-            box-shadow: inset 0 1px 5px #ffe0e8, 0 10px 20px rgba(0,0,0,0.05);
-        }
-
-        .games-title {
-            text-align: center;
-            font-size: 2rem;
-            font-weight: bold;
-            color: #e65c7b;
-            margin-bottom: 25px;
-        }
-
-        .game-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            justify-content: center;
-        }
-
-        .game-card {
-            background: white;
-            border-radius: 44px;
-            flex: 1;
-            min-width: 280px;
-            padding: 20px 18px 24px;
-            text-align: center;
-            box-shadow: 0 12px 28px rgba(255, 105, 135, 0.2);
-            border: 1px solid #ffccd5;
-            transition: transform 0.2s;
-        }
-        .game-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .game-card h3 {
-            font-size: 1.7rem;
-            color: #d14b6e;
-            margin-bottom: 12px;
-        }
-
-        .game-card p {
-            color: #a1425c;
-            margin-bottom: 15px;
-        }
-
-        button {
-            background: #ff90aa;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 60px;
-            font-weight: bold;
-            color: white;
-            font-size: 1rem;
-            cursor: pointer;
-            margin: 6px;
-            box-shadow: 0 3px 5px rgba(0,0,0,0.1);
-            transition: 0.2s;
-        }
-
-        button:active {
-            transform: scale(0.96);
-        }
-
-        .click-counter {
-            font-size: 2rem;
-            font-weight: bold;
-            background: #ffecf0;
-            display: inline-block;
-            padding: 6px 20px;
-            border-radius: 50px;
-            margin: 8px auto;
-            color: #c33a5e;
-        }
-
-        .surprise-message {
-            margin-top: 18px;
-            font-weight: bold;
-            background: #ffd9e2;
-            border-radius: 34px;
-            padding: 10px;
-            font-size: 1rem;
-        }
-
-        .quiz-box, .memory-grid, .wheel-area, .secret-area, .memory-area {
-            background: #fff0f3;
-            border-radius: 28px;
-            padding: 15px;
-            margin-top: 12px;
-        }
-
-        .quiz-option {
-            background: #ffe3ea;
-            margin: 8px;
-            padding: 6px 12px;
-            border-radius: 40px;
-            cursor: pointer;
-            transition: 0.1s;
-        }
-
-        .quiz-option:hover {
-            background: #ffc0ce;
-        }
-
-        .memory-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            max-width: 300px;
-            margin: 0 auto;
-        }
-        .memory-card {
-            background: #ffb7c5;
-            aspect-ratio: 1 / 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            border-radius: 16px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .memory-card.flipped {
-            background: #fff0f3;
-        }
-        .heart-catch-area {
-            background: #ffe3ea;
-            border-radius: 40px;
-            padding: 10px;
-            min-height: 200px;
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-        }
-        .floating-heart {
-            position: absolute;
-            font-size: 2rem;
-            animation: floatUp 2s ease-in forwards;
-            pointer-events: auto;
-            cursor: pointer;
-        }
-        @keyframes floatUp {
-            0% { transform: translateY(0); opacity: 1; }
-            100% { transform: translateY(-150px); opacity: 0; }
-        }
-        .score {
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin: 10px 0;
-        }
-        .wheel {
-            width: 150px;
-            height: 150px;
-            margin: 10px auto;
-            border-radius: 50%;
-            background: conic-gradient(#ff6b6b 0% 25%, #ffb347 25% 50%, #ff6b9d 50% 75%, #c06cff 75% 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: transform 0.3s;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-        .wheel:active {
-            transform: scale(0.95);
-        }
-        .wheel-inner {
-            background: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-        }
-        .secret-input {
-            padding: 8px;
-            border-radius: 30px;
-            border: 1px solid #ffb7c5;
-            margin: 8px;
-            width: 80%;
-        }
-        .footer-note {
-            text-align: center;
-            background: #ffdce4;
-            margin: 10px 20px 25px;
-            padding: 1.3rem;
-            border-radius: 40px;
-            font-size: 1.1rem;
-            font-weight: 500;
-            color: #a12b4b;
-        }
-
-        @media (max-width: 700px) {
-            .hero h1 { font-size: 1.8rem; }
-            .games-title { font-size: 1.5rem; }
-            .time-digits { font-size: 1rem; gap: 8px; }
-            .time-unit span { font-size: 1.2rem; }
-        }
-    </style>
-</head>
-<body>
-
-<div class="gift-container">
-    <div class="hero">
-        <h1>💖 Senin İçin 💖 <span style="font-size:2rem;">🐻‍❄️❤️</span></h1>
-        <p>En tatlı anılarımız, minik oyunlar ve sürprizlerle dolu bir hediye!</p>
+<!-- EKLENECEK OYUNLARIN KAPSARI -->
+<div class="ek-oyunlar" style="font-family: system-ui, 'Segoe UI', sans-serif; max-width: 1200px; margin: 40px auto; padding: 20px; border-top: 3px dashed #ffb7c5; background: #fff9fb; border-radius: 32px; box-shadow: 0 10px 25px rgba(0,0,0,0.05);">
+  
+  <h2 style="text-align: center; color: #e34262; margin-bottom: 30px;">✨ Sürpriz Mini Oyunlar ✨</h2>
+  
+  <div style="display: flex; flex-wrap: wrap; gap: 30px; justify-content: center;">
+    
+    <!-- ------ OYUN 1 : KALP YAKALAMA ------ -->
+    <div style="flex: 1; min-width: 280px; background: white; border-radius: 48px; padding: 20px; box-shadow: 0 8px 20px rgba(233, 30, 99, 0.15); text-align: center;">
+      <h3 style="color:#c2185b;">❤️ Kalp Yakalama ❤️</h3>
+      <p style="font-size:14px; color:#a55;">Kayan kalpleri yakala, puan topla!</p>
+      <div style="position: relative; height: 350px; background: #ffeef4; border-radius: 40px; overflow: hidden; margin: 15px 0; cursor: pointer; box-shadow: inset 0 0 0 2px #ffcddc, 0 4px 12px rgba(0,0,0,0.1);" id="oyunAlani">
+        <div id="skorBoard" style="position: absolute; top: 15px; left: 20px; background: #e34262; color: white; padding: 5px 16px; border-radius: 40px; font-weight: bold; z-index: 10;">❤️ Skor: 0</div>
+        <div id="zamanBoard" style="position: absolute; top: 15px; right: 20px; background: #333; color: #ffd; padding: 5px 16px; border-radius: 40px; font-weight: bold; z-index: 10;">⏱️ 30</div>
+      </div>
+      <button id="oyunBaslatBtn" style="background:#e34262; border:none; color:white; font-size:1rem; padding:8px 24px; border-radius:60px; margin-top:8px; cursor:pointer; font-weight:bold; box-shadow:0 2px 6px rgba(0,0,0,0.2);">🎮 Başlat / Yeniden Başlat</button>
+      <p style="font-size:12px; margin-top:12px;">💡 İpucu: Kalplere tıkla ya da dokun!</p>
     </div>
-
-    <div class="love-counter">
-        <h3>⏰ Sevgili Olduğumuz Gün ⏰</h3>
-        <div class="counter-box">
-            <div class="time-digits" id="loveTimer">
-                <div class="time-unit"><span id="days">0</span><span class="unit-label">gün</span></div>
-                <div class="time-unit"><span id="hours">0</span><span class="unit-label">saat</span></div>
-                <div class="time-unit"><span id="minutes">0</span><span class="unit-label">dakika</span></div>
-                <div class="time-unit"><span id="seconds">0</span><span class="unit-label">saniye</span></div>
-            </div>
-            <p style="font-size: 0.9rem; margin-top: 12px; opacity:0.9;">💗 Her saniye seninle daha güzel 💗</p>
-        </div>
+    
+    <!-- ------ OYUN 2 : KALBİN EŞİNİ BUL (EŞLEŞTİRME) ------ -->
+    <div style="flex: 1; min-width: 320px; background: white; border-radius: 48px; padding: 20px; box-shadow: 0 8px 20px rgba(233, 30, 99, 0.15); text-align: center;">
+      <h3 style="color:#c2185b;">💞 Kalbin Eşini Bul 💞</h3>
+      <p style="font-size:14px; color:#a55;">Aynı kalp çiftlerini eşleştir!</p>
+      <div id="kartGrid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; max-width: 380px; margin: 20px auto; justify-items: center;">
+        <!-- kartlar js ile doldurulacak -->
+      </div>
+      <button id="kartlariKaristirBtn" style="background:#f3a683; border:none; color:white; font-size:1rem; padding:8px 24px; border-radius:60px; cursor:pointer; font-weight:bold; margin-top:5px;">🃏 Kartları Karıştır</button>
+      <div id="eslesmeDurumu" style="margin-top: 12px; font-weight: bold; color: #e34262;"></div>
     </div>
-
-    <div class="gallery">
-        <h2>📸 Bizden Kareler 📸</h2>
-        <div class="photo-slider" id="photoSlider">
-            <div class="photo-card"><img src="1.jpeg" alt="Fotoğraf 1"></div>
-            <div class="photo-card"><img src="2.jpeg" alt="Fotoğraf 2"></div>
-            <div class="photo-card"><img src="3.jpeg" alt="Fotoğraf 3"></div>
-            <div class="photo-card"><img src="4.jpeg" alt="Fotoğraf 4"></div>
-            <div class="photo-card"><img src="5.jpeg" alt="Fotoğraf 5"></div>
-            <div class="photo-card"><img src="6.jpeg" alt="Fotoğraf 6"></div>
-        </div>
-        <p style="text-align:center; margin-top:-8px; font-size:13px; color:#c87f96;">👉🏻 Kaydırarak anılara bak 👈🏻</p>
-    </div>
-
-    <div class="games-section">
-        <div class="games-title">🎮 Hadi Oynayalım! 🎮</div>
-        <div class="game-grid">
-            
-            <!-- OYUN 1: ÖPÜCÜK SAYACI -->
-            <div class="game-card">
-                <h3>💗 Öpücük Sayacı 💗</h3>
-                <p>Sevgiline sanal öpücük gönder, sayı artsın!</p>
-                <div class="click-counter" id="kissCounter">0</div>
-                <button id="kissBtn">😘 Öpücük Gönder</button>
-                <button id="resetKissBtn">🔄 Sıfırla</button>
-                <div id="kissMessage" class="surprise-message" style="display:none;">💕 Harikasın! Bu kadar öpücük çok büyük aşk! 💕</div>
-            </div>
-            
-            <!-- OYUN 2: AŞK TAHMİNCESİ -->
-            <div class="game-card">
-                <h3>❓ Aşk Tahmincesi ❓</h3>
-                <p>Beni ne kadar tanıyorsun?</p>
-                <div class="quiz-box">
-                    <div id="questionText"></div>
-                    <div id="quizOptions"></div>
-                    <div id="quizFeedback"></div>
-                </div>
-                <button id="newQuizBtn">✨ Yeni Soru ✨</button>
-            </div>
-
-            <!-- OYUN 3: SÜRPRİZ AŞK NOTU -->
-            <div class="game-card">
-                <h3>🎁 Sürpriz Aşk Notu 🎁</h3>
-                <p>Şans butonuna bas, tatlı mesaj gelsin.</p>
-                <button id="surpriseNoteBtn">✨ Aşk Notu Çek ✨</button>
-                <div id="surpriseResult" style="margin-top: 18px; background:#ffeef2; border-radius:34px; padding: 12px; min-height: 70px;">💌 Notunu görmek için tıkla</div>
-            </div>
-
-            <!-- OYUN 4: KALP YAKALAMA -->
-            <div class="game-card">
-                <h3>💝 Kalp Yakalama 💝</h3>
-                <p>Uçan kalplere tıkla, puan topla!</p>
-                <div class="score">❤️ Skor: <span id="heartScore">0</span></div>
-                <div class="heart-catch-area" id="heartArea">
-                    <div style="text-align:center; line-height:160px;">🎯 Kalpleri yakalamak için bu alana tıkla</div>
-                </div>
-                <button id="startHeartGame">Başlat / Sıfırla</button>
-            </div>
-
-            <!-- OYUN 5: EŞİNİ BULMA (Hafıza Oyunu) -->
-            <div class="game-card">
-                <h3>🧠 Eşini Bulma 🧠</h3>
-                <p>Aynı kalpleri eşle, sevgini göster!</p>
-                <div class="memory-grid" id="memoryGrid"></div>
-                <button id="resetMemoryBtn">🔄 Yeniden Başlat</button>
-                <div id="memoryStatus" style="margin-top:8px;">Kartları eşleştir</div>
-            </div>
-
-            <!-- YENİ OYUN 6: AŞK ÇARKI -->
-            <div class="game-card">
-                <h3>✨ Aşk Çarkı ✨</h3>
-                <p>Çarkı çevir, romantik ödülünü al!</p>
-                <div class="wheel" id="loveWheel">
-                    <div class="wheel-inner">🎡</div>
-                </div>
-                <div id="wheelResult" style="margin-top: 15px; font-weight: bold; min-height: 60px;">✨ Çarkı çevirmek için tıkla ✨</div>
-            </div>
-
-            <!-- YENİ OYUN 7: GİZLİ MESAJ -->
-            <div class="game-card">
-                <h3>💌 Gizli Mesaj 💌</h3>
-                <p>Şifreyi çöz, sürpriz aşk mesajını bul!</p>
-                <div class="secret-area">
-                    <div>🔐 İpucu: Senin doğum günün (GGAA)</div>
-                    <input type="text" id="secretCode" class="secret-input" placeholder="Şifreyi gir...">
-                    <button id="unlockBtn">🔓 Mesajı Aç</button>
-                    <div id="secretMessage" style="margin-top: 12px; padding: 10px; background:#ffeef2; border-radius: 24px; min-height: 60px;">💖 Şifreyi gir, aşk mektubu gelsin...</div>
-                </div>
-            </div>
-
-            <!-- YENİ OYUN 8: HATIRLIYOR MUSUN? -->
-            <div class="game-card">
-                <h3>🌸 Hatırlıyor musun? 🌸</h3>
-                <p>Birlikte anılarımızı tahmin et!</p>
-                <div class="quiz-box">
-                    <div id="memoryQuestion"></div>
-                    <div id="memoryOptions"></div>
-                    <div id="memoryFeedback"></div>
-                </div>
-                <button id="newMemoryBtn">✨ Yeni Anı Sorusu ✨</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="footer-note">
-        💖 Bu site tamamen sana özel, en sevdiğim kişi! Her tıklamada biraz daha mutlu oluyorum. Seni çok seviyorum. 💖
-    </div>
+  </div>
 </div>
 
 <script>
-    // ---- AŞK SAYACI ----
-    const sevgiliOldugumuzTarih = new Date(2025, 7, 31, 0, 0, 0);
-    function updateLoveCounter() {
-        const now = new Date();
-        const diff = now - sevgiliOldugumuzTarih;
-        if (diff <= 0) return;
-        const seconds = Math.floor(diff / 1000);
-        const minutes = Math.floor(seconds / 60);
-        const hours = Math.floor(minutes / 60);
-        const days = Math.floor(hours / 24);
-        document.getElementById('days').innerText = days;
-        document.getElementById('hours').innerText = hours % 24;
-        document.getElementById('minutes').innerText = minutes % 60;
-        document.getElementById('seconds').innerText = seconds % 60;
+  (function() {
+    // ----- KALP YAKALAMA OYUNU -----
+    let aktifOyun = false;
+    let skor = 0;
+    let sure = 30;
+    let kalpId = 0;
+    let kalpler = [];
+    let zamanlayiciInterval = null;
+    let kalpUretimInterval = null;
+    
+    const oyunAlani = document.getElementById('oyunAlani');
+    const skorBoard = document.getElementById('skorBoard');
+    const zamanBoard = document.getElementById('zamanBoard');
+    const baslatBtn = document.getElementById('oyunBaslatBtn');
+    
+    function oyunuDurdurVeTemizle() {
+      if (zamanlayiciInterval) clearInterval(zamanlayiciInterval);
+      if (kalpUretimInterval) clearInterval(kalpUretimInterval);
+      for (let k of kalpler) {
+        if (k && k.element) k.element.remove();
+      }
+      kalpler = [];
+      aktifOyun = false;
     }
-    setInterval(updateLoveCounter, 1000);
-    updateLoveCounter();
-
-    // ---- ÖPÜCÜK SAYACI ----
-    let kissCount = 0;
-    const kissCounterEl = document.getElementById('kissCounter');
-    const kissBtn = document.getElementById('kissBtn');
-    const resetKissBtn = document.getElementById('resetKissBtn');
-    const kissMessageDiv = document.getElementById('kissMessage');
-    function updateKissDisplay() {
-        kissCounterEl.innerText = kissCount;
-        kissMessageDiv.style.display = kissCount >= 20 ? 'block' : 'none';
-    }
-    kissBtn.addEventListener('click', () => { kissCount++; updateKissDisplay(); });
-    resetKissBtn.addEventListener('click', () => { kissCount = 0; updateKissDisplay(); });
-
-    // ---- AŞK TAHMİNCESİ ----
-    const questionsBank = [
-        { text: "En sevdiğim renk?", options: ["💙 Mavi", "❤️ Kırmızı", "💖 Pembe"], correct: 2 },
-        { text: "En sevdiğim rapçi?", options: ["🎤 Ceg", "🎤 Hidra", "🎤 Pit10"], correct: 0 },
-        { text: "Gülüşünü nasıl buluyorum?", options: ["😊 Samimi", "😒 Kötü", "🥰 Tatlı"], correct: 2 },
-        { text: "Sana sevgim ne kadar?", options: ["🤔 Sıradan", "👍 Normal", "💖 Çok"], correct: 2 },
-        { text: "Buluşmalarımızda en çok ne yapmayı severiz?", options: ["🍿 Film izle", "☕ Kahve iç", "🥰 Sarılmak"], correct: 2 }
-    ];
-    let currentQuestionIndex = 0;
-    const questionTextEl = document.getElementById('questionText');
-    const quizOptionsDiv = document.getElementById('quizOptions');
-    const quizFeedback = document.getElementById('quizFeedback');
-    function loadQuestion(index) {
-        const q = questionsBank[index % questionsBank.length];
-        questionTextEl.innerText = q.text;
-        quizOptionsDiv.innerHTML = '';
-        q.options.forEach((opt, idx) => {
-            const optDiv = document.createElement('div');
-            optDiv.className = 'quiz-option';
-            optDiv.innerText = opt;
-            optDiv.addEventListener('click', () => {
-                if (idx === q.correct) {
-                    quizFeedback.innerHTML = '🥳 Harika! Beni çok iyi tanıyorsun 💞';
-                    setTimeout(() => {
-                        currentQuestionIndex = (currentQuestionIndex + 1) % questionsBank.length;
-                        loadQuestion(currentQuestionIndex);
-                        quizFeedback.innerHTML = '✨ Yeni soru! ✨';
-                        setTimeout(() => { if(quizFeedback.innerHTML === '✨ Yeni soru! ✨') quizFeedback.innerHTML = ''; }, 1500);
-                    }, 800);
-                } else {
-                    quizFeedback.innerHTML = '😘 Tekrar dene aşkım! ❤️';
-                }
-            });
-            quizOptionsDiv.appendChild(optDiv);
-        });
-    }
-    document.getElementById('newQuizBtn').addEventListener('click', () => {
-        currentQuestionIndex = (currentQuestionIndex + 1) % questionsBank.length;
-        loadQuestion(currentQuestionIndex);
-        quizFeedback.innerHTML = '🎀 Yeni soru geldi! 🎀';
-        setTimeout(() => { if(quizFeedback.innerHTML === '🎀 Yeni soru geldi! 🎀') quizFeedback.innerHTML = ''; }, 1200);
-    });
-    loadQuestion(0);
-
-    // ---- SÜRPRİZ AŞK NOTU ----
-    const surpriseMessages = ["💌 Seni her gün daha çok seviyorum! 💌", "🌸 Yanımda olduğun için şanslıyım, aşkım. 🌸", "💖 Sen benim en güzel sürprizimsin! 💖", "🌙 Gözlerin dolunay gibi aydınlatıyor dünyamı.", "🍫 Tadın çikolata gibi, seni sevmek çok tatlı.", "🎵 Kalbim senin için atıyor, daima."];
-    const surpriseBtn = document.getElementById('surpriseNoteBtn');
-    const surpriseResultDiv = document.getElementById('surpriseResult');
-    surpriseBtn.addEventListener('click', () => {
-        const randomIndex = Math.floor(Math.random() * surpriseMessages.length);
-        surpriseResultDiv.innerHTML = `✨ ${surpriseMessages[randomIndex]} ✨ 🥰`;
-    });
-
-    // ---- KALP YAKALAMA OYUNU ----
-    let heartScore = 0;
-    let heartInterval = null;
-    const heartScoreSpan = document.getElementById('heartScore');
-    const heartArea = document.getElementById('heartArea');
-    function createHeart() {
-        const heart = document.createElement('div');
-        heart.className = 'floating-heart';
-        heart.innerHTML = ['❤️', '💖', '💗', '💓'][Math.floor(Math.random()*4)];
-        heart.style.left = Math.random() * (heartArea.clientWidth - 40) + 'px';
-        heart.style.bottom = '0px';
-        heart.style.position = 'absolute';
-        heart.style.fontSize = '2rem';
-        heart.style.cursor = 'pointer';
-        heart.addEventListener('click', (e) => {
-            e.stopPropagation();
-            heartScore++;
-            heartScoreSpan.innerText = heartScore;
-            heart.remove();
-        });
-        heartArea.appendChild(heart);
-        setTimeout(() => { if(heart.parentNode) heart.remove(); }, 1900);
-    }
-    function startHeartGame() {
-        if(heartInterval) clearInterval(heartInterval);
-        heartScore = 0;
-        heartScoreSpan.innerText = heartScore;
-        const hearts = heartArea.querySelectorAll('.floating-heart');
-        hearts.forEach(h => h.remove());
-        heartInterval = setInterval(() => { if(heartArea.children.length < 15) createHeart(); }, 500);
-    }
-    document.getElementById('startHeartGame').addEventListener('click', startHeartGame);
-    startHeartGame();
-
-    // ---- EŞİNİ BULMA (Hafıza Oyunu) ----
-    const memoryValues = ['❤️', '💖', '💗', '💓', '💕', '💞', '💘', '💝'];
-    let memoryCards = [...memoryValues, ...memoryValues];
-    let shuffledCards = [];
-    let flippedIndices = [];
-    let lockBoard = false;
-    let matchedPairs = 0;
-    const memoryGrid = document.getElementById('memoryGrid');
-    const memoryStatus = document.getElementById('memoryStatus');
-    function shuffleArray(arr) {
-        for (let i = arr.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [arr[i], arr[j]] = [arr[j], arr[i]];
+    
+    function kalpOlustur() {
+      if (!aktifOyun) return;
+      const kalp = document.createElement('div');
+      kalp.innerText = '❤️';
+      kalp.style.position = 'absolute';
+      kalp.style.fontSize = '32px';
+      kalp.style.cursor = 'pointer';
+      kalp.style.userSelect = 'none';
+      kalp.style.transition = 'all 0.05s linear';
+      const maxX = oyunAlani.clientWidth - 50;
+      const maxY = oyunAlani.clientHeight - 50;
+      const left = Math.max(10, Math.random() * maxX);
+      kalp.style.left = left + 'px';
+      kalp.style.top = '-40px';
+      kalp.style.opacity = '0.9';
+      kalp.style.filter = 'drop-shadow(0 2px 4px rgba(0,0,0,0.2))';
+      kalp.style.zIndex = 20;
+      const hiz = 1 + Math.random() * 3.5; // düşme hızı px/frame
+      const id = kalpId++;
+      const obj = { element: kalp, y: -40, hiz: hiz, id: id };
+      kalpler.push(obj);
+      oyunAlani.appendChild(kalp);
+      
+      kalp.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (!aktifOyun) return;
+        // yakalama
+        skor++;
+        skorBoard.innerText = `❤️ Skor: ${skor}`;
+        // kalp patlama efekti gibi
+        kalp.style.transform = 'scale(1.5)';
+        kalp.style.opacity = '0';
+        setTimeout(() => {
+          if (kalp.parentNode) kalp.remove();
+        }, 50);
+        // listeden kaldır
+        const index = kalpler.findIndex(k => k.id === id);
+        if (index !== -1) kalpler.splice(index, 1);
+      });
+      
+      // animasyon başlat (requestAnimationFrame ile hareket)
+      function dusur() {
+        if (!aktifOyun) return;
+        const idx = kalpler.findIndex(k => k.id === id);
+        if (idx === -1) return; // silinmiş
+        const item = kalpler[idx];
+        item.y += item.hiz;
+        if (item.y > oyunAlani.clientHeight - 40) {
+          // kaçtı -> can kaybı yok sadece kalp kaybolur
+          if (item.element && item.element.parentNode) item.element.remove();
+          kalpler.splice(idx,1);
+          return;
         }
-        return arr;
+        if (item.element) item.element.style.top = item.y + 'px';
+        requestAnimationFrame(() => dusur());
+      }
+      requestAnimationFrame(dusur);
     }
-    function createMemoryBoard() {
-        shuffledCards = shuffleArray([...memoryCards]);
-        memoryGrid.innerHTML = '';
-        flippedIndices = [];
-        matchedPairs = 0;
-        lockBoard = false;
-        memoryStatus.innerText = 'Kartları eşleştir!';
-        shuffledCards.forEach((value, idx) => {
-            const card = document.createElement('div');
-            card.classList.add('memory-card');
-            card.dataset.value = value;
-            card.dataset.index = idx;
-            card.innerText = '?';
-            card.addEventListener('click', () => flipCard(card, idx));
-            memoryGrid.appendChild(card);
-        });
+    
+    function sureSayaci() {
+      if (!aktifOyun) return;
+      sure--;
+      zamanBoard.innerText = `⏱️ ${sure}`;
+      if (sure <= 0) {
+        // oyun bitti
+        oyunuDurdurVeTemizle();
+        aktifOyun = false;
+        zamanBoard.innerText = `⏱️ 0`;
+        alert(`Oyun Bitti! Toplam puanın: ${skor} ❤️`);
+        baslatBtn.innerText = '🎮 Tekrar Oyna';
+      }
     }
-    function flipCard(card, idx) {
-        if(lockBoard) return;
-        if(flippedIndices.includes(idx)) return;
-        if(card.innerText !== '?') return;
-        card.innerText = shuffledCards[idx];
-        card.classList.add('flipped');
-        flippedIndices.push(idx);
-        if(flippedIndices.length === 2) {
-            lockBoard = true;
-            checkMatch();
-        }
+    
+    function oyunuBaslat() {
+      oyunuDurdurVeTemizle();
+      skor = 0;
+      sure = 30;
+      skorBoard.innerText = `❤️ Skor: 0`;
+      zamanBoard.innerText = `⏱️ 30`;
+      aktifOyun = true;
+      if (zamanlayiciInterval) clearInterval(zamanlayiciInterval);
+      if (kalpUretimInterval) clearInterval(kalpUretimInterval);
+      zamanlayiciInterval = setInterval(() => sureSayaci(), 1000);
+      kalpUretimInterval = setInterval(() => { if(aktifOyun) kalpOlustur(); }, 600);
+      // başlangıçta birkaç kalp
+      for(let i=0;i<3;i++) setTimeout(()=> kalpOlustur(), i*200);
+      baslatBtn.innerText = '🎮 Oynanıyor...';
     }
-    function checkMatch() {
-        const [idx1, idx2] = flippedIndices;
-        const card1 = document.querySelector(`.memory-card[data-index='${idx1}']`);
-        const card2 = document.querySelector(`.memory-card[data-index='${idx2}']`);
-        if(shuffledCards[idx1] === shuffledCards[idx2]) {
-            matchedPairs++;
-            card1.style.visibility = 'hidden';
-            card2.style.visibility = 'hidden';
-            flippedIndices = [];
-            lockBoard = false;
-            if(matchedPairs === 8) memoryStatus.innerText = '🎉 Tebrikler! Tüm eşleri buldun! Çok iyisin 💖🎉';
-            else memoryStatus.innerText = '✅ Eşleşti! Devam et 💪';
-        } else {
-            setTimeout(() => {
-                card1.innerText = '?';
-                card2.innerText = '?';
-                card1.classList.remove('flipped');
-                card2.classList.remove('flipped');
-                flippedIndices = [];
-                lockBoard = false;
-                memoryStatus.innerText = 'Tekrar dene! 🫶';
-            }, 700);
-        }
-    }
-    document.getElementById('resetMemoryBtn').addEventListener('click', createMemoryBoard);
-    createMemoryBoard();
-
-    // ---- YENİ OYUN 1: AŞK ÇARKI ----
-    const wheelPrizes = [
-        "💕 +10 Öpücük Hakkı!",
-        "🌸 Sana bir şiir yazacağım!",
-        "💖 Sarılma ödülü kazandın!",
-        "🎵 En sevdiğin şarkıyı dinleme vakti",
-        "🍫 Sana çikolata alacağım",
-        "🌙 Bu gece masal okuyacağım sana",
-        "💌 Gizli bir itiraf: Seni çok seviyorum!",
-        "✨ Bir sürpriz hakkı kazandın!"
-    ];
-    const wheel = document.getElementById('loveWheel');
-    const wheelResult = document.getElementById('wheelResult');
-    let isSpinning = false;
-    wheel.addEventListener('click', () => {
-        if(isSpinning) return;
-        isSpinning = true;
-        const spinCount = Math.floor(Math.random() * 20) + 10;
-        let currentRotation = 0;
-        const interval = setInterval(() => {
-            currentRotation += 15;
-            wheel.style.transform = `rotate(${currentRotation}deg)`;
-            if(currentRotation >= 360 * spinCount) {
-                clearInterval(interval);
-                wheel.style.transform = '';
-                const prizeIndex = Math.floor(Math.random() * wheelPrizes.length);
-                wheelResult.innerHTML = `🎡 Çark durdu! 🎡<br>🏆 Kazandın: ${wheelPrizes[prizeIndex]} 🏆`;
-                isSpinning = false;
-            }
-        }, 20);
+    
+    baslatBtn.addEventListener('click', () => {
+      oyunuBaslat();
     });
-
-    // ---- YENİ OYUN 2: GİZLİ MESAJ ----
-    const secretCodeInput = document.getElementById('secretCode');
-    const unlockBtn = document.getElementById('unlockBtn');
-    const secretMessageDiv = document.getElementById('secretMessage');
-    // Varsayılan şifre: 2412 (örnek, sevgilinin doğum günü GGAA formatında)
-    const correctCode = "2412"; // Bunu sevgilinin doğum gününe göre değiştirebilirsin
-    unlockBtn.addEventListener('click', () => {
-        if(secretCodeInput.value === correctCode) {
-            secretMessageDiv.innerHTML = "💖💖💖 Sana olan sevgim kelimelere sığmaz! Her gün sana daha çok aşık oluyorum. Sen benim en büyük şansımsın! 💖💖💖";
-            secretMessageDiv.style.background = "#ffd9e2";
-        } else {
-            secretMessageDiv.innerHTML = "❌ Şifre yanlış! İpucu: Doğum günün (gün ay olarak) ❌";
-            secretMessageDiv.style.background = "#ffeef2";
+    
+    // ----- KALBİN EŞİNİ BUL (EŞLEŞTİRME) -----
+    const kartIkonlari = ['❤️', '💖', '💗', '💓', '💘', '💝', '💟', '❣️'];
+    let kartlar = [];
+    let acikKartlar = [];
+    let kilitli = false;
+    let eslesmeSayisi = 0;
+    const gridEl = document.getElementById('kartGrid');
+    const eslesmeDurumuEl = document.getElementById('eslesmeDurumu');
+    const karistirBtn = document.getElementById('kartlariKaristirBtn');
+    
+    function karistirArray(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+    
+    function yeniKartDizisi() {
+      // 4 çift seç (toplam 8 kart)
+      let secilenIkonlar = [...kartIkonlari.slice(0,4), ...kartIkonlari.slice(0,4)];
+      return karistirArray(secilenIkonlar);
+    }
+    
+    function kartOlustur(ikon, index) {
+      const kart = document.createElement('div');
+      kart.className = 'kart';
+      kart.style.width = '70px';
+      kart.style.height = '90px';
+      kart.style.backgroundColor = '#ffe0e7';
+      kart.style.borderRadius = '20px';
+      kart.style.display = 'flex';
+      kart.style.alignItems = 'center';
+      kart.style.justifyContent = 'center';
+      kart.style.fontSize = '38px';
+      kart.style.boxShadow = '0 6px 0 #b9848f';
+      kart.style.cursor = 'pointer';
+      kart.style.transition = '0.2s';
+      kart.style.userSelect = 'none';
+      kart.style.backfaceVisibility = 'hidden';
+      kart.setAttribute('data-icon', ikon);
+      kart.setAttribute('data-index', index);
+      kart.setAttribute('data-eslesti', 'false');
+      
+      // kapalı yüz
+      const inner = document.createElement('span');
+      inner.innerText = '?';
+      inner.style.fontSize = '42px';
+      inner.style.fontWeight = 'bold';
+      inner.style.color = '#e34262';
+      kart.appendChild(inner);
+      
+      let acik = false;
+      kart.addEventListener('click', () => {
+        if (kilitli) return;
+        if (acik) return;
+        if (kart.getAttribute('data-eslesti') === 'true') return;
+        // kartı aç
+        inner.innerText = ikon;
+        inner.style.fontSize = '48px';
+        acik = true;
+        acikKartlar.push({ kart, ikon, index });
+        if (acikKartlar.length === 2) {
+          kilitli = true;
+          setTimeout(() => kontrolEt(), 400);
         }
+      });
+      
+      // yeniden kapatma fonksiyonu
+      const kapat = () => {
+        if (kart.getAttribute('data-eslesti') === 'true') return;
+        inner.innerText = '?';
+        inner.style.fontSize = '42px';
+        acik = false;
+      };
+      kart.kapat = kapat;
+      return kart;
+    }
+    
+    function kontrolEt() {
+      const [kart1, kart2] = acikKartlar;
+      if (kart1.ikon === kart2.ikon) {
+        // eşleşti
+        kart1.kart.setAttribute('data-eslesti', 'true');
+        kart2.kart.setAttribute('data-eslesti', 'true');
+        kart1.kart.style.background = '#d4f1f9';
+        kart2.kart.style.background = '#d4f1f9';
+        kart1.kart.style.opacity = '0.7';
+        kart2.kart.style.opacity = '0.7';
+        eslesmeSayisi++;
+        eslesmeDurumuEl.innerText = `💕 Eşleşme: ${eslesmeSayisi} / 4`;
+        if (eslesmeSayisi === 4) {
+          eslesmeDurumuEl.innerHTML = '🎉 Tüm kalpler birleşti! 🎉 <br> 💖 Muhteşemsin! 💖';
+        }
+        acikKartlar = [];
+        kilitli = false;
+      } else {
+        // eşleşmedi
+        setTimeout(() => {
+          kart1.kart.kapat();
+          kart2.kart.kapat();
+          acikKartlar = [];
+          kilitli = false;
+        }, 200);
+      }
+    }
+    
+    function tahlayiciKartlariYenile() {
+      gridEl.innerHTML = '';
+      const yeniDizi = yeniKartDizisi();
+      kartlar = [];
+      eslesmeSayisi = 0;
+      acikKartlar = [];
+      kilitli = false;
+      eslesmeDurumuEl.innerText = `💕 Eşleşme: 0 / 4`;
+      for (let i=0; i<yeniDizi.length; i++) {
+        const kart = kartOlustur(yeniDizi[i], i);
+        kartlar.push(kart);
+        gridEl.appendChild(kart);
+      }
+    }
+    
+    karistirBtn.addEventListener('click', () => {
+      tahlayiciKartlariYenile();
     });
-
-    // ---- YENİ OYUN 3: HATIRLIYOR MUSUN? ----
-    const memoryQuestions = [
-        { text: "İlk buluşmamızda neredeydik?", options: ["☕ Kafe", "🍿 Sinema", "🌳 Park"], correct: 0 },
-        { text: "Bana ilk kez ne demiştin?", options: ["😊 Merhaba", "🥰 Çok tatlısın", "💕 Seni seviyorum"], correct: 0 },
-        { text: "En çok güldüğümüz anı nerede yaşadık?", options: ["🎮 Evde", "🍕 Restoranda", "🚶 Yürüyüşte"], correct: 0 },
-        { text: "Sana ilk hediyem neydi?", options: ["🧸 Oyuncak ayı", "📖 Kitap", "💍 Yüzük"], correct: 0 }
-    ];
-    let currentMemoryIndex = 0;
-    const memoryQuestionEl = document.getElementById('memoryQuestion');
-    const memoryOptionsDiv = document.getElementById('memoryOptions');
-    const memoryFeedbackDiv = document.getElementById('memoryFeedback');
-    function loadMemoryQuestion(index) {
-        const q = memoryQuestions[index % memoryQuestions.length];
-        memoryQuestionEl.innerText = q.text;
-        memoryOptionsDiv.innerHTML = '';
-        q.options.forEach
+    
+    // ilk yüklemede kartları hazırla
+    tahlayiciKartlariYenile();
+    
+    // Sayfa yeniden boyutlandırmada kalp oyun alanı düzenini koru
+    window.addEventListener('resize', () => {
+      // oyun alanındaki kalplerin konumlarını korumak için ekstra bir şey yapmıyoruz, sadece oyun alanı yeniden konumlanır.
+    });
+    
+  })();
+</script>
